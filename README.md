@@ -179,9 +179,7 @@ O banco foi modelado em **19 entidades**, organizadas pelas 5 fases do fluxo.
 
 O DER segue o fluxo do sistema, de cima para baixo (fases 1 a 5). Caixas tracejadas são repetições de uma entidade já mostrada, usadas só para evitar linhas cruzadas, e as linhas animadas indicam o caminho principal do serviço.
 
-![DER do GoatWork](./diagramas/DER-GoatWork.drawio.png)
-
-> Arquivo editável: [`diagramas/DER-GoatWork.drawio`](./diagramas/DER-GoatWork.drawio)
+![DER do GoatWork](./diagramas/DER.GoatWork.png)
 
 ### 8.2 MER – Entidades e atributos
 
@@ -297,8 +295,7 @@ GoatWork/
 ├── README.md
 ├── MER-GoatWork.md
 └── diagramas/
-    ├── DER-GoatWork.drawio
-    ├── DER-GoatWork.png
+    ├── DER.GoatWork.png
     ├── escopo-GoatWork.drawio
     └── escopo-GoatWork.png
 ```
@@ -320,8 +317,8 @@ GoatWork/
 - [x] Definição da ideia e do escopo
 - [x] Fluxo principal do sistema
 - [x] Modelo conceitual (MER) e diagrama (DER)
-- [ ] Definição da stack tecnológica
-- [ ] Modelo físico do banco de dados (scripts SQL)
+- [x] Definição da stack tecnológica
+- [x] Modelo físico do banco de dados (scripts SQL)
 - [ ] Protótipo das telas (cadastro, chat, contrato, pagamento)
 - [ ] Integração com a IA de atendimento
 - [ ] Integração com gateway de pagamento (Pix e cartão)
