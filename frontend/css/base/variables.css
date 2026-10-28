@@ -1,0 +1,10 @@
+/* Paleta extraída do Figma — ajuste os valores exatos no Dev Mode */
+:root {
+  --cor-azul-escuro: #0f1f45;  /* navbar / footer / botões */
+  --cor-laranja: #e8590c;      /* destaques, "Work" do logo */
+  --cor-marrom: #8a3a07;       /* títulos */
+  --cor-bege: #f8ebde;         /* fundos de card */
+  --cor-bege-claro: #fdeedd;   /* seções de destaque */
+  --cor-branco: #ffffff;
+  --raio-card: 10px;
+}
