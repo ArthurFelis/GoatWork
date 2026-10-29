@@ -1,0 +1,148 @@
+
+#navbar {
+    position: relative;
+    z-index: 20;
+    background: #ffffff;
+}
+
+.gw-navbar {
+    width: min(1320px, calc(100% - 72px));
+    min-height: 88px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    border-bottom: 1px solid #f0eeeb;
+}
+
+.gw-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #080b12;
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -1.1px;
+    white-space: nowrap;
+}
+
+.gw-brand-icon {
+    display: grid;
+    place-items: center;
+    width: 31px;
+    height: 31px;
+    border-radius: 8px;
+    background: var(--gw-navy);
+    color: #ffffff;
+    font-size: 15px;
+}
+
+.gw-brand em {
+    font-style: normal;
+    color: var(--gw-orange);
+}
+
+.gw-nav-links {
+    display: flex;
+    align-items: center;
+    gap: clamp(18px, 3vw, 46px);
+    margin-left: auto;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1767e8;
+}
+
+.gw-nav-links a {
+    transition: color 0.2s;
+}
+
+.gw-nav-links a:hover,
+.gw-nav-links a[aria-current="page"] {
+    color: var(--gw-orange-dark);
+}
+
+.gw-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.gw-nav-login {
+    padding: 12px 5px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1767e8;
+    white-space: nowrap;
+}
+
+.gw-nav-cta {
+    padding: 12px 18px;
+    border-radius: 5px;
+    background: #1767e8;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.gw-menu-toggle {
+    display: none;
+    border: 0;
+    background: #ffffff;
+    color: var(--gw-navy);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+@media (max-width: 760px) {
+    .gw-navbar {
+        width: calc(100% - 36px);
+        min-height: 74px;
+        gap: 12px;
+    }
+
+    .gw-brand {
+        font-size: 21px;
+    }
+
+    .gw-nav-links {
+        position: absolute;
+        top: 74px;
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 12px 22px 20px;
+        background: #ffffff;
+        border-bottom: 1px solid var(--gw-border);
+        box-shadow: 0 16px 25px #10204412;
+    }
+
+    .gw-nav-links.is-open {
+        display: flex;
+    }
+
+    .gw-nav-links a {
+        padding: 14px 2px;
+        border-bottom: 1px solid #f2f0ed;
+    }
+
+    .gw-menu-toggle {
+        display: block;
+    }
+
+    .gw-nav-actions {
+        margin-left: auto;
+    }
+
+    .gw-nav-login {
+        font-size: 13px;
+    }
+
+    .gw-nav-cta {
+        display: none;
+    }
+}

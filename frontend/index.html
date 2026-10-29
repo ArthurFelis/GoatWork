@@ -1,15 +1,299 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GoatWork - Home</title>
-  <link rel="stylesheet" href="css/base/variables.css">
-  <link rel="stylesheet" href="css/base/reset.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="description"
+          content="Encontre profissionais remotos de confiança com a GoatWork.">
+
+    <title>GoatWork — Talentos para seus projetos</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
+
+    <link rel="stylesheet" href="css/base/variables.css">
+    <link rel="stylesheet" href="css/base/reset.css">
+    <link rel="stylesheet" href="css/components/navbar.css">
+    <link rel="stylesheet" href="css/components/footer.css">
+    <link rel="stylesheet" href="css/pages/home.css">
 </head>
+
 <body>
-  <div id="navbar"></div>
-  <main><!-- Home: hero, Como funciona, Mais bem avaliados --></main>
-  <div id="footer"></div>
+    <div id="navbar"></div>
+
+    <main>
+        <!-- BANNER PRINCIPAL -->
+        <section class="hero container" id="inicio">
+            <div class="hero-image-wrap">
+
+                <img
+                    class="hero-image"
+                    src="assets/images/equipe-profissionais.jpg"
+                    alt="Equipe de profissionais trabalhando em conjunto"
+                >
+
+                <div class="hero-shade"></div>
+
+                <div class="hero-topline">
+                    <span class="status-dot"></span>
+                    TALENTOS REAIS. TRABALHO BEM COMBINADO.
+                </div>
+
+                <div class="hero-content">
+                    <p class="hero-kicker">
+                        A plataforma para trabalhar melhor
+                    </p>
+
+                    <h1>
+                        O próximo grande projeto começa com
+                        <em>a pessoa certa.</em>
+                    </h1>
+
+                    <p class="hero-description">
+                        Encontre profissionais remotos, converse com
+                        clareza e organize cada etapa do serviço em
+                        um só lugar.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="button button-primary"
+                           href="pages/profissionais.html">
+                            Encontrar profissionais
+                            <span aria-hidden="true">↗</span>
+                        </a>
+
+                        <a class="button button-ghost"
+                           href="pages/novo-pedido.html">
+                            Conte o que você precisa
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-caption">
+                    <span>01</span>
+                    <span>Conexões que levam ideias adiante</span>
+                </div>
+
+                <a class="hero-scroll" href="#explorar">
+                    <span>↓</span>
+                    ROLE PARA EXPLORAR
+                </a>
+
+                <div class="hero-inset">
+                    <img
+                        src="assets/images/profissional-ana.jpg"
+                        alt="Profissional trabalhando em um escritório"
+                    >
+
+                    <div>
+                        <span class="inset-label">GOATWORK SELECT</span>
+                        <strong>Gente boa de trabalho.</strong>
+                        <small>Talentos para cada etapa.</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACESSO RÁPIDO À BUSCA -->
+        <section class="search-strip container"
+                 id="explorar"
+                 aria-label="Explorar profissionais">
+
+            <a href="pages/profissionais.html" class="search-item">
+                <span class="search-symbol" aria-hidden="true">⌕</span>
+
+                <span>
+                    <small>ENCONTRE POR ÁREA</small>
+                    <strong>Que profissional você procura?</strong>
+                </span>
+
+                <span class="search-arrow" aria-hidden="true">↗</span>
+            </a>
+
+            <a href="pages/profissionais.html" class="search-item">
+                <span class="search-symbol" aria-hidden="true">◷</span>
+
+                <span>
+                    <small>TRABALHO REMOTO</small>
+                    <strong>Talentos de onde você estiver</strong>
+                </span>
+
+                <span class="search-arrow" aria-hidden="true">↗</span>
+            </a>
+
+            <a href="pages/novo-pedido.html"
+               class="search-submit"
+               aria-label="Começar uma busca">
+                →
+            </a>
+        </section>
+
+        <!-- PROFISSIONAIS EM DESTAQUE -->
+        <section class="featured-section container" id="profissionais">
+            <div class="section-heading">
+                <div>
+                    <span class="section-kicker">
+                        ENCONTRE SEU PRÓXIMO PARCEIRO
+                    </span>
+
+                    <h2>Profissionais em destaque</h2>
+
+                    <p>
+                        Conheça talentos prontos para transformar
+                        boas ideias em entregas reais.
+                    </p>
+                </div>
+
+                <div class="section-arrows">
+                    <a href="pages/profissionais.html"
+                       aria-label="Ver todos os profissionais">
+                        ↗
+                    </a>
+                </div>
+            </div>
+
+            <div
+                class="professionals-grid"
+                id="professionals-grid"
+                aria-live="polite">
+            </div>
+
+            <div class="section-foot">
+                <span>
+                    Perfis demonstrativos. Substitua pelos dados
+                    reais da sua plataforma.
+                </span>
+
+                <a class="text-link" href="pages/profissionais.html">
+                    Explorar todos os talentos <span>→</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- COMO FUNCIONA -->
+        <section class="how-section" id="como-funciona">
+            <div class="container how-layout">
+
+                <div class="how-intro">
+                    <span class="section-kicker">
+                        SIMPLES DO INÍCIO AO FIM
+                    </span>
+
+                    <h2>
+                        Menos complicação.
+                        <br>
+                        <em>Mais trabalho bem feito.</em>
+                    </h2>
+
+                    <p>
+                        Da primeira conversa à entrega, a GoatWork
+                        ajuda a manter todos na mesma página.
+                    </p>
+
+                    <a class="text-link" href="#etapas">
+                        Conheça o processo <span>→</span>
+                    </a>
+                </div>
+
+                <div class="steps-list" id="etapas">
+                    <article class="step">
+                        <span class="step-number">01</span>
+
+                        <div>
+                            <h3>Conte o que precisa</h3>
+                            <p>
+                                Organize sua ideia e descreva o serviço
+                                com ajuda da plataforma.
+                            </p>
+                        </div>
+
+                        <span class="step-icon" aria-hidden="true">↗</span>
+                    </article>
+
+                    <article class="step">
+                        <span class="step-number">02</span>
+
+                        <div>
+                            <h3>Converse e alinhe</h3>
+                            <p>
+                                Combine detalhes, expectativas e prazos
+                                diretamente pelo chat.
+                            </p>
+                        </div>
+
+                        <span class="step-icon" aria-hidden="true">↗</span>
+                    </article>
+
+                    <article class="step">
+                        <span class="step-number">03</span>
+
+                        <div>
+                            <h3>Formalize o projeto</h3>
+                            <p>
+                                Deixe escopo, valores e entregas
+                                documentados no contrato.
+                            </p>
+                        </div>
+
+                        <span class="step-icon" aria-hidden="true">↗</span>
+                    </article>
+
+                    <article class="step">
+                        <span class="step-number">04</span>
+
+                        <div>
+                            <h3>Acompanhe a entrega</h3>
+                            <p>
+                                Tenha mais clareza durante o trabalho
+                                e na conclusão do serviço.
+                            </p>
+                        </div>
+
+                        <span class="step-icon" aria-hidden="true">↗</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONVITE PARA PROFISSIONAIS -->
+        <section class="join-section container">
+            <div class="join-image">
+                <img
+                    src="assets/images/profissional-carlos.jpg"
+                    alt="Profissional em retrato corporativo"
+                    loading="lazy"
+                >
+            </div>
+
+            <div class="join-copy">
+                <span class="section-kicker">
+                    VOCÊ TAMBÉM PODE FAZER PARTE
+                </span>
+
+                <h2>Seu talento merece chegar mais longe.</h2>
+
+                <p>
+                    Crie seu perfil, apresente seu trabalho e
+                    conecte-se a pessoas que precisam das suas
+                    habilidades.
+                </p>
+
+                <a class="button button-primary"
+                   href="pages/cadastro-profissional.html">
+                    Seja um profissional <span>↗</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script type="module" src="js/pages/home.js"></script>
 </body>
 </html>

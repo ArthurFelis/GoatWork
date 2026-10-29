@@ -1,10 +1,18 @@
 /* Paleta extraída do Figma — ajuste os valores exatos no Dev Mode */
 :root {
-  --cor-azul-escuro: #0f1f45;  /* navbar / footer / botões */
-  --cor-laranja: #e8590c;      /* destaques, "Work" do logo */
-  --cor-marrom: #8a3a07;       /* títulos */
-  --cor-bege: #f8ebde;         /* fundos de card */
-  --cor-bege-claro: #fdeedd;   /* seções de destaque */
-  --cor-branco: #ffffff;
-  --raio-card: 10px;
+   --font-family: 'Manrope', sans-serif;
+    --gw-navy: #102044;
+    --gw-navy-2: #1b315b;
+
+    --gw-orange: #f16a24;
+    --gw-orange-dark: #b74608;
+
+    --gw-cream: #fff0e2;
+    --gw-ink: #182238;
+    --gw-muted: #737b89;
+    --gw-border: #e9e5e0;
+    --gw-white: #ffffff;
+
+    --gw-shadow: 0 18px 50px rgba(16, 32, 68, 0.12);
 }
+
