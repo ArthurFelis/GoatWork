@@ -1,6 +1,7 @@
 namespace GoatWork.Domain.Enums;
 
+// Valores idênticos aos ENUMs do banco (database/GoatWork.sql)
 public enum StatusEntrega
 {
-    // TODO: valores do ENUM correspondente no banco
+    PENDENTE, APROVADA, REJEITADA
 }

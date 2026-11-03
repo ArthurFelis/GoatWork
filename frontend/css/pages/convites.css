@@ -1,0 +1,110 @@
+.cv-container {
+    width: min(1002px, calc(100% - 32px));
+}
+
+.cv-abas {
+    margin-bottom: 26px;
+}
+
+.cv-abas .chip {
+    min-height: 46px;
+    padding: 0 20px;
+}
+
+.cv-lista {
+    display: grid;
+    gap: 26px;
+}
+
+.cv-card {
+    padding: 26px 26px 24px;
+    border: 1px solid var(--gw-border);
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+.cv-topo {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.cv-quem {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.cv-quem h2 {
+    font-family: var(--font-display);
+    font-size: 16.5px;
+    font-weight: 700;
+}
+
+.cv-quem span:not(.avatar) {
+    color: #8b7b70;
+    font-size: 12.5px;
+}
+
+.cv-resumo {
+    margin: 16px 0 14px;
+    color: var(--gw-ink);
+    font-size: 14px;
+}
+
+.cv-card .info-strip {
+    padding: 13px 17px;
+}
+
+.cv-card .info-strip dt {
+    font-size: 11.5px;
+}
+
+.cv-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.cv-acoes--entre {
+    justify-content: space-between;
+}
+
+.cv-acoes .btn {
+    min-height: 48px;
+}
+
+.cv-recusado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 20px 26px;
+    border: 1px solid #f0dfcf;
+    border-radius: 12px;
+    background: var(--gw-cream-3);
+}
+
+.cv-recusado h2 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.cv-recusado span {
+    color: #8b7b70;
+    font-size: 12.5px;
+}
+
+@media (max-width: 640px) {
+    .cv-topo {
+        flex-direction: column;
+    }
+
+    .cv-acoes .btn {
+        flex: 1;
+    }
+}

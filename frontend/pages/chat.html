@@ -1,19 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GoatWork - chat</title>
-  <link rel="stylesheet" href="../css/base/variables.css">
-  <link rel="stylesheet" href="../css/base/reset.css">
-  <link rel="stylesheet" href="../css/components/navbar.css">
-  <link rel="stylesheet" href="../css/components/footer.css">
-  <link rel="stylesheet" href="../css/pages/chat.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c1e44">
+    <title>Mensagens — GoatWork</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c1e44'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23fe893c'%3EG%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/base/variables.css">
+    <link rel="stylesheet" href="../css/base/reset.css">
+    <link rel="stylesheet" href="../css/base/typography.css">
+    <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/footer.css">
+    <link rel="stylesheet" href="../css/components/buttons.css">
+    <link rel="stylesheet" href="../css/components/forms.css">
+    <link rel="stylesheet" href="../css/components/cards.css">
+    <link rel="stylesheet" href="../css/components/chat.css">
+    <link rel="stylesheet" href="../css/pages/chat.css">
 </head>
 <body>
-  <div id="navbar"></div>
-  <main></main>
-  <div id="footer"></div>
-  <script type="module" src="../js/pages/chat.js"></script>
+    <div id="navbar"></div>
+    <main class="chat-layout">
+        <aside class="conversas" id="conversas" aria-label="Conversas">
+            <h2>Conversas</h2>
+            <div class="loading"></div>
+        </aside>
+
+        <section class="chat-panel" aria-label="Conversa">
+            <header class="chat-header" id="cabecalho">
+                <div>
+                    <h1 id="chat-titulo">Mensagens</h1>
+                    <p id="chat-subtitulo">&nbsp;</p>
+                </div>
+                <span class="chat-lock" id="chat-lock" hidden>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fe893c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                    Conversa monitorada
+                </span>
+            </header>
+
+            <div class="chat-body" id="mensagens" aria-live="polite">
+                <div class="loading">Carregando…</div>
+            </div>
+
+            <form class="chat-form" id="form-msg" autocomplete="off">
+                <label class="sr-only" for="texto">Escreva sua mensagem</label>
+                <input class="input" id="texto" type="text" placeholder="Escreva sua mensagem..." maxlength="2000" disabled>
+                <button class="btn btn-primary" type="submit" id="btn-enviar" disabled>Enviar</button>
+            </form>
+        </section>
+    </main>
+    <div id="footer"></div>
+    <script type="module" src="../js/pages/chat.js"></script>
 </body>
 </html>

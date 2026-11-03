@@ -1,19 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GoatWork - entrar</title>
-  <link rel="stylesheet" href="../css/base/variables.css">
-  <link rel="stylesheet" href="../css/base/reset.css">
-  <link rel="stylesheet" href="../css/components/navbar.css">
-  <link rel="stylesheet" href="../css/components/footer.css">
-  <link rel="stylesheet" href="../css/pages/entrar.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c1e44">
+    <title>Entrar — GoatWork</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c1e44'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23fe893c'%3EG%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/base/variables.css">
+    <link rel="stylesheet" href="../css/base/reset.css">
+    <link rel="stylesheet" href="../css/base/typography.css">
+    <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/footer.css">
+    <link rel="stylesheet" href="../css/components/buttons.css">
+    <link rel="stylesheet" href="../css/components/forms.css">
+    <link rel="stylesheet" href="../css/components/cards.css">
+    <link rel="stylesheet" href="../css/pages/entrar.css">
 </head>
 <body>
-  <div id="navbar"></div>
-  <main></main>
-  <div id="footer"></div>
-  <script type="module" src="../js/pages/entrar.js"></script>
+    <div id="navbar"></div>
+    <main class="auth-page">
+        <div class="auth-grid">
+            <section class="card card--shadow auth-card">
+                <h1 class="auth-title">Entrar na GoatWork</h1>
+
+                <div class="segmented" role="group" aria-label="Tipo de conta" id="tipo-conta">
+                    <button type="button" data-tipo="CLIENTE" aria-pressed="true">Sou Cliente</button>
+                    <button type="button" data-tipo="TRABALHADOR" aria-pressed="false">Sou Trabalhador</button>
+                </div>
+
+                <form id="form-entrar" novalidate>
+                    <p class="form-error" id="erro" hidden></p>
+
+                    <div class="field">
+                        <label class="label" for="email">E-mail</label>
+                        <input class="input" id="email" name="email" type="email" placeholder="voce@email.com" autocomplete="email" required>
+                    </div>
+
+                    <div class="field">
+                        <label class="label" for="senha">Senha</label>
+                        <input class="input" id="senha" name="senha" type="password" placeholder="Sua senha" autocomplete="current-password" required>
+                    </div>
+
+                    <label class="check auth-check">
+                        <input type="checkbox" id="aceite">
+                        <span>Li e aceito os <a class="link-termos" href="termos.html" target="_blank">termos de uso</a> e a isenção de responsabilidade da GoatWork.</span>
+                    </label>
+
+                    <button class="btn btn-primary btn-block auth-submit" id="btn-entrar" type="submit" disabled>Entrar como cliente</button>
+                </form>
+
+                <p class="auth-alt">Não tem conta? <a class="link" id="link-cadastro" href="cadastro.html">Cadastre-se</a></p>
+            </section>
+
+            <aside class="termos-painel" id="termos-painel" aria-label="Termos de uso"></aside>
+        </div>
+    </main>
+    <div id="footer"></div>
+    <script type="module" src="../js/pages/entrar.js"></script>
 </body>
 </html>

@@ -1,0 +1,83 @@
+@import url("novo-pedido.css");
+
+.rb-card {
+    padding: 28px 29px 28px;
+}
+
+.rb-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.rb-topo .badge {
+    padding: 7px 13px;
+    font-size: 13px;
+}
+
+.rb-gerado {
+    color: var(--gw-muted);
+    font-size: 12.5px;
+}
+
+.rb-resumo {
+    display: block;
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 17px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: var(--gw-cream);
+    color: var(--gw-ink);
+    font-size: 15px;
+    line-height: 1.55;
+    resize: none;
+    overflow: hidden;
+}
+
+.rb-resumo:focus {
+    outline: none;
+    border-color: var(--gw-orange);
+}
+
+.rb-label-linha {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.rb-editar {
+    border: 0;
+    background: none;
+    color: var(--gw-brown);
+    font-size: 12.5px;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.rb-requisitos {
+    margin-top: -2px;
+}
+
+.rb-req-edicao {
+    min-height: 110px;
+}
+
+.rb-navy-txt {
+    color: #e6eaf4;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.rb-navy-txt + .rb-navy-txt {
+    margin-top: 12px;
+}
+
+.rb-cat {
+    color: var(--gw-orange);
+}
+
+#caixa-confirmo {
+    margin-top: 4px;
+}

@@ -2,5 +2,6 @@ namespace GoatWork.Domain.Entities;
 
 public class Categoria
 {
-    // TODO: propriedades conforme a tabela no database/GoatWork.sql
+    public int IdCategoria { get; set; }
+    public string Nome { get; set; } = string.Empty;
 }

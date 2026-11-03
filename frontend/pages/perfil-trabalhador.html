@@ -1,19 +1,92 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GoatWork - perfil-trabalhador</title>
-  <link rel="stylesheet" href="../css/base/variables.css">
-  <link rel="stylesheet" href="../css/base/reset.css">
-  <link rel="stylesheet" href="../css/components/navbar.css">
-  <link rel="stylesheet" href="../css/components/footer.css">
-  <link rel="stylesheet" href="../css/pages/perfil-trabalhador.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c1e44">
+    <title>Meu perfil — GoatWork</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c1e44'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23fe893c'%3EG%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/base/variables.css">
+    <link rel="stylesheet" href="../css/base/reset.css">
+    <link rel="stylesheet" href="../css/base/typography.css">
+    <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/footer.css">
+    <link rel="stylesheet" href="../css/components/buttons.css">
+    <link rel="stylesheet" href="../css/components/forms.css">
+    <link rel="stylesheet" href="../css/components/cards.css">
+    <link rel="stylesheet" href="../css/pages/perfil-trabalhador.css">
 </head>
 <body>
-  <div id="navbar"></div>
-  <main></main>
-  <div id="footer"></div>
-  <script type="module" src="../js/pages/perfil-trabalhador.js"></script>
+    <div id="navbar"></div>
+    <main class="page">
+        <div class="container">
+            <header class="np-head">
+                <h1 class="page-title">Meu perfil</h1>
+                <p class="page-subtitle">Clientes veem estas informações ao encontrar você.</p>
+            </header>
+
+            <div class="pf-layout">
+                <aside class="side-stack">
+                    <section class="card pf-resumo" id="resumo">
+                        <div class="loading"></div>
+                    </section>
+                    <section class="card-soft pf-verificacao">
+                        <h3>Verificação de identidade</h3>
+                        <p id="verificacao">—</p>
+                    </section>
+                </aside>
+
+                <form class="card pf-form" id="form-perfil" novalidate>
+                    <p class="form-error" id="erro" hidden></p>
+
+                    <div class="field">
+                        <label class="label" for="biografia">Biografia</label>
+                        <textarea class="textarea pf-bio" id="biografia" maxlength="1000" placeholder="Ex.: Instalações residenciais, quadros de energia e manutenção preventiva."></textarea>
+                        <p class="hint">Conte sua experiência em poucas linhas.</p>
+                    </div>
+
+                    <div class="field pf-dados">
+                        <div>
+                            <label class="label" for="profissao">Profissão</label>
+                            <input class="input" id="profissao" type="text" maxlength="80" placeholder="Ex.: Eletricista">
+                        </div>
+                        <div>
+                            <label class="label" for="cidade">Cidade</label>
+                            <input class="input" id="cidade" type="text" maxlength="100" placeholder="Ex.: São Paulo, SP ou Remoto">
+                        </div>
+                        <div>
+                            <label class="label" for="valor">Valor de referência</label>
+                            <div class="pf-valor">
+                                <input class="input" id="valor" type="text" inputmode="numeric" placeholder="R$ 0,00">
+                                <select class="select" id="unidade" aria-label="Unidade do valor">
+                                    <option value="h">/h</option>
+                                    <option value="dia">/dia</option>
+                                    <option value="evento">/evento</option>
+                                    <option value="sessão">/sessão</option>
+                                    <option value="serviço">/serviço</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <span class="label">Categorias de atuação</span>
+                        <div class="pf-atuacoes" id="atuacoes"></div>
+                        <button class="pf-add" type="button" id="btn-add">+ Adicionar categoria</button>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn btn-secondary" type="button" id="btn-cancelar">Cancelar</button>
+                        <button class="btn btn-primary" type="submit" id="btn-salvar">Salvar perfil</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <div id="footer"></div>
+    <script type="module" src="../js/pages/perfil-trabalhador.js"></script>
 </body>
 </html>

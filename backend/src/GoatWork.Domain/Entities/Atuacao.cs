@@ -2,5 +2,10 @@ namespace GoatWork.Domain.Entities;
 
 public class Atuacao
 {
-    // TODO: propriedades conforme a tabela no database/GoatWork.sql
+    public int IdTrabalhador { get; set; }
+    public int IdCategoria { get; set; }
+    public byte AnosExperiencia { get; set; }
+
+    public Trabalhador Trabalhador { get; set; } = null!;
+    public Categoria Categoria { get; set; } = null!;
 }

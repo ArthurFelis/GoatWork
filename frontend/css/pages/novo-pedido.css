@@ -1,0 +1,64 @@
+.np-head {
+    margin-bottom: 26px;
+}
+
+.np-stepper {
+    margin-bottom: 28px;
+}
+
+.np-card {
+    padding: 30px 29px 28px;
+}
+
+.np-card .field {
+    margin-bottom: 20px;
+}
+
+.np-descricao .textarea {
+    min-height: 190px;
+    font-size: 15.5px;
+}
+
+.np-dicas {
+    padding: 26px 24px 24px;
+}
+
+.np-dicas h3 {
+    margin-bottom: 18px;
+    font-size: 16.5px;
+}
+
+.np-dicas .num-list {
+    color: #5a463b;
+    font-size: 14.5px;
+}
+
+.np-dicas-nota {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid #ead2bd;
+    color: var(--gw-brown-2);
+    font-size: 13px;
+}
+
+.np-preferido {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: var(--gw-cream-3);
+    color: var(--gw-brown-2);
+    font-size: 14px;
+}
+
+.np-preferido button {
+    border: 0;
+    background: none;
+    color: var(--gw-brown);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: underline;
+}

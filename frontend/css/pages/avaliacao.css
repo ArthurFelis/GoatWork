@@ -1,0 +1,95 @@
+@import url("entrega.css");
+
+.av-quem {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.av-quem strong {
+    display: block;
+    color: var(--gw-brown);
+    font-family: var(--font-display);
+    font-size: 19px;
+}
+
+.av-quem span:not(.avatar) {
+    color: var(--gw-muted);
+    font-size: 14px;
+}
+
+.estrelas {
+    display: flex;
+    gap: 6px;
+}
+
+.estrela {
+    display: grid;
+    place-items: center;
+    width: 51px;
+    height: 51px;
+    border: 1px solid #e3d8cc;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #a99a8e;
+    transition: background-color 0.12s, transform 0.08s;
+}
+
+.estrela:hover {
+    transform: translateY(-1px);
+}
+
+.estrela svg {
+    width: 23px;
+    height: 23px;
+}
+
+.estrela.is-on {
+    border-color: transparent;
+    background: #fde6d2;
+    color: #e8590c;
+}
+
+.estrela.is-on svg {
+    fill: currentColor;
+}
+
+.av-legenda {
+    margin: 10px 0 24px;
+    color: var(--gw-muted);
+    font-size: 13px;
+}
+
+.av-comentario .textarea {
+    min-height: 166px;
+}
+
+.av-resumo h3 {
+    font-size: 16.5px;
+}
+
+.av-resumo p {
+    padding-bottom: 14px;
+    border-bottom: 1px solid #ead2bd;
+    color: #6a564b;
+    font-size: 14.5px;
+}
+
+.av-resumo dl {
+    display: grid;
+    gap: 9px;
+    margin: 14px 0 0;
+}
+
+.av-resumo dl div {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13.5px;
+}
+
+.av-resumo dd {
+    margin: 0;
+    color: var(--gw-brown);
+    font-weight: 800;
+}

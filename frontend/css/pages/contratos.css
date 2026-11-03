@@ -1,0 +1,60 @@
+.ct-secao + .ct-secao {
+    margin-top: 32px;
+}
+
+.pedidos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.pedido-card {
+    padding: 22px 21px 20px;
+    border: 1px solid var(--gw-border);
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+.pedido-topo {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.pedido-card h3 {
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+.pedido-meta {
+    margin: 12px 0 10px;
+    color: #7d6a5d;
+    font-size: 13.5px;
+}
+
+.pedido-card .link,
+.table .link {
+    font-size: 13.5px;
+}
+
+.table td:first-child {
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.table td:nth-child(4) {
+    white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+    .pedidos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-head {
+        flex-direction: column;
+    }
+}

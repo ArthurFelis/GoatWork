@@ -74,7 +74,9 @@ a partir de `database/GoatWork.sql`.
 | 10 | Entrega | `entrega.html` | Entregas | entrega |
 | 11 | Disputa | `disputa.html` | Disputas | disputa |
 | 12 | Avaliação | `avaliacao.html` | Avaliacoes | avaliacao |
-| 13 | Painel do admin | `admin.html` | Admin | disputa, contrato, mensagem |
+| 13 | Painel do admin | `admin.html` (`?aba=contratos|usuarios|termos`) | Admin, Termos | disputa, contrato, mensagem, usuario, termo_uso |
+| 14 | Pedidos e contratos | `contratos.html` | Pedidos, Contratos | pedido, contrato, pagamento, entrega |
+| – | Aprovar entrega (cliente) | `entrega.html` (mesma tela, visão do cliente) | Entregas | entrega, pagamento |
 
 ## Ordem sugerida de construção (segue as 5 fases)
 

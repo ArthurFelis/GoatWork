@@ -1,0 +1,145 @@
+@import url("novo-pedido.css");
+
+.pg-layout {
+    grid-template-columns: minmax(0, 1fr) 313px;
+}
+
+.pg-card {
+    padding: 30px 29px 30px;
+}
+
+.pg-metodo button {
+    min-height: 50px;
+    font-size: 15.5px;
+}
+
+.pg-box {
+    display: grid;
+    grid-template-columns: 175px minmax(0, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+    padding: 20px;
+    border-radius: 12px;
+    background: var(--gw-cream-3);
+}
+
+.pg-cartao {
+    display: block;
+}
+
+.pg-cartao .field {
+    margin-bottom: 14px;
+}
+
+.pg-qr {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    border: 1px solid #ead9c8;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #6a564b;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.pg-pix h2 {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.pg-pix ol {
+    margin: 10px 0 14px;
+    padding-left: 20px;
+    color: var(--gw-ink);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.pg-copia {
+    display: flex;
+    gap: 10px;
+}
+
+.pg-copia .input {
+    font-size: 13px;
+    text-overflow: ellipsis;
+}
+
+.pg-situacao-label {
+    margin-top: 28px;
+    margin-bottom: 12px;
+}
+
+.pg-total {
+    padding: 28px 25px 25px;
+}
+
+.pg-total .total {
+    font-size: 36px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.pg-valores {
+    margin: 16px 0 20px;
+    display: grid;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.pg-valores div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pg-valores dt {
+    color: #dfe3ee;
+}
+
+.pg-valores dd {
+    margin: 0;
+    color: #ffffff;
+}
+
+.pg-total .btn {
+    width: 100%;
+    min-height: 50px;
+    font-size: 16px;
+}
+
+.pg-status-ok {
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.pg-status-ok + .link {
+    display: block;
+    margin-top: 12px;
+    color: var(--gw-orange);
+    text-align: center;
+    font-size: 13px;
+}
+
+.pg-servico p {
+    color: #6a564b;
+    font-size: 13.5px;
+}
+
+@media (max-width: 640px) {
+    .pg-box {
+        grid-template-columns: 1fr;
+    }
+
+    .pg-qr {
+        max-width: 200px;
+    }
+}

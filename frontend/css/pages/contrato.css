@@ -1,0 +1,92 @@
+.ct-card {
+    padding: 34px 33px 34px;
+}
+
+.ct-card h1 {
+    font-size: 29px;
+    font-weight: 700;
+}
+
+.ct-gerado {
+    margin-top: 8px;
+    color: var(--gw-muted);
+    font-size: 13.5px;
+}
+
+.ct-card .info-strip {
+    margin: 22px 0 26px;
+    padding: 18px 18px;
+}
+
+.ct-clausula + .ct-clausula {
+    margin-top: 20px;
+}
+
+.ct-clausula h2 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.ct-clausula p {
+    margin-top: 5px;
+    color: #4f433d;
+    font-size: 14px;
+}
+
+.ct-assinaturas h2 {
+    margin-bottom: 14px;
+    font-size: 17px;
+}
+
+.ct-assinatura {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 46px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: var(--gw-cream);
+    color: #6a564b;
+    font-size: 14px;
+}
+
+.ct-assinatura + .ct-assinatura {
+    margin-top: 12px;
+}
+
+.ct-assinatura .ok {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--gw-brown);
+    font-size: 12.5px;
+    font-weight: 700;
+}
+
+.ct-assinatura .pendente {
+    color: #9b8b80;
+    font-size: 12.5px;
+    font-weight: 600;
+}
+
+.ct-assinatura .btn {
+    min-height: 46px;
+    padding: 0 19px;
+}
+
+.ct-total .small {
+    display: block;
+}
+
+.ct-acao {
+    margin-top: 16px;
+    text-align: center;
+    color: #e6eaf4;
+    font-size: 14px;
+}
+
+.ct-voltar {
+    justify-self: start;
+    font-size: 13px;
+}

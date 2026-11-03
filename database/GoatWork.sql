@@ -56,7 +56,15 @@ CREATE TABLE trabalhador (
   verificado        BOOLEAN      NOT NULL DEFAULT FALSE,
   nota_media        DECIMAL(3,2) NOT NULL DEFAULT 0.00,
   data_verificacao  DATETIME     NULL,
+  -- exibidos em "Encontre profissionais" e "Meu perfil"
+  profissao           VARCHAR(80)   NULL,
+  cidade              VARCHAR(100)  NULL,
+  valor_referencia    DECIMAL(12,2) NULL,
+  unidade_valor       VARCHAR(20)   NULL,          -- h, dia, evento, sessão, serviço
+  servicos_concluidos INT UNSIGNED  NOT NULL DEFAULT 0,
+  total_avaliacoes    INT UNSIGNED  NOT NULL DEFAULT 0,
   PRIMARY KEY (id_usuario),
+  CONSTRAINT ck_trabalhador_valor CHECK (valor_referencia IS NULL OR valor_referencia >= 0),
   CONSTRAINT ck_trabalhador_nota CHECK (nota_media BETWEEN 0 AND 5),
   CONSTRAINT fk_trabalhador_usuario FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario)
     ON UPDATE CASCADE ON DELETE CASCADE
@@ -101,9 +109,14 @@ CREATE TABLE pedido (
   status            ENUM('RASCUNHO','EM_BRIEFING','PUBLICADO','EM_ANDAMENTO','CONCLUIDO','CANCELADO')
                     NOT NULL DEFAULT 'RASCUNHO',
   data_criacao      DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  -- preenchido quando o cliente clica em "Contratar" num profissional específico
+  id_trabalhador_preferido INT UNSIGNED NULL,
   PRIMARY KEY (id_pedido),
   KEY ix_pedido_cliente (id_cliente),
   KEY ix_pedido_categoria (id_categoria),
+  KEY ix_pedido_trab_preferido (id_trabalhador_preferido),
+  CONSTRAINT fk_pedido_trab_preferido FOREIGN KEY (id_trabalhador_preferido) REFERENCES trabalhador (id_usuario)
+    ON UPDATE CASCADE ON DELETE SET NULL,
   CONSTRAINT fk_pedido_cliente FOREIGN KEY (id_cliente) REFERENCES cliente (id_usuario)
     ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT fk_pedido_categoria FOREIGN KEY (id_categoria) REFERENCES categoria (id_categoria)

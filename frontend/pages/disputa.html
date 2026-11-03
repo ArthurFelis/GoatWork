@@ -1,19 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GoatWork - disputa</title>
-  <link rel="stylesheet" href="../css/base/variables.css">
-  <link rel="stylesheet" href="../css/base/reset.css">
-  <link rel="stylesheet" href="../css/components/navbar.css">
-  <link rel="stylesheet" href="../css/components/footer.css">
-  <link rel="stylesheet" href="../css/pages/disputa.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c1e44">
+    <title>Disputa — GoatWork</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c1e44'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23fe893c'%3EG%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/base/variables.css">
+    <link rel="stylesheet" href="../css/base/reset.css">
+    <link rel="stylesheet" href="../css/base/typography.css">
+    <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/footer.css">
+    <link rel="stylesheet" href="../css/components/buttons.css">
+    <link rel="stylesheet" href="../css/components/forms.css">
+    <link rel="stylesheet" href="../css/components/cards.css">
+    <link rel="stylesheet" href="../css/pages/disputa.css">
 </head>
 <body>
-  <div id="navbar"></div>
-  <main></main>
-  <div id="footer"></div>
-  <script type="module" src="../js/pages/disputa.js"></script>
+    <div id="navbar"></div>
+    <main class="page">
+        <div class="container">
+            <header class="np-head">
+                <p class="page-eyebrow" id="numero">Contrato</p>
+                <h1 class="page-title" id="titulo">Abrir disputa</h1>
+                <p class="page-subtitle">Um administrador vai analisar o chat e o contrato e registrar a decisão.</p>
+            </header>
+
+            <div class="layout-side pg-layout">
+                <section class="card en-card" id="principal">
+                    <div class="loading">Carregando…</div>
+                </section>
+
+                <aside class="side-stack">
+                    <section class="card-outline ds-como">
+                        <h3>Como funciona</h3>
+                        <ol class="ds-etapas" id="etapas">
+                            <li data-status="ABERTA"><span class="num-dot">1</span><div><strong>Aberta</strong><span>Você descreve o motivo.</span></div></li>
+                            <li data-status="EM_ANALISE"><span class="num-dot">2</span><div><strong>Em análise</strong><span>Um administrador consulta chat e contrato.</span></div></li>
+                            <li data-status="RESOLVIDA"><span class="num-dot">3</span><div><strong>Resolvida</strong><span>A decisão é registrada e o pagamento é liberado ou estornado.</span></div></li>
+                        </ol>
+                    </section>
+                    <div class="card-soft">Tente resolver primeiro pelo chat. A disputa é o caminho para quando não houver acordo.</div>
+                </aside>
+            </div>
+        </div>
+    </main>
+    <div id="footer"></div>
+    <script type="module" src="../js/pages/disputa.js"></script>
 </body>
 </html>

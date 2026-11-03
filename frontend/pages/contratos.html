@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c1e44">
+    <title>Pedidos e contratos — GoatWork</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c1e44'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23fe893c'%3EG%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/base/variables.css">
+    <link rel="stylesheet" href="../css/base/reset.css">
+    <link rel="stylesheet" href="../css/base/typography.css">
+    <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/footer.css">
+    <link rel="stylesheet" href="../css/components/buttons.css">
+    <link rel="stylesheet" href="../css/components/forms.css">
+    <link rel="stylesheet" href="../css/components/cards.css">
+    <link rel="stylesheet" href="../css/pages/contratos.css">
+</head>
+<body>
+    <div id="navbar"></div>
+    <main class="page">
+        <div class="container">
+            <header class="page-head">
+                <div>
+                    <h1 class="page-title" id="titulo">Pedidos e contratos</h1>
+                    <p class="page-subtitle">Acompanhe cada etapa e veja o que falta fazer.</p>
+                </div>
+                <a class="btn btn-primary" id="btn-novo" href="novo-pedido.html" hidden>+ Novo pedido</a>
+            </header>
+
+            <section class="ct-secao" id="secao-pedidos" hidden>
+                <h2 class="section-title">Pedidos</h2>
+                <div class="pedidos-grid" id="pedidos"></div>
+            </section>
+
+            <section class="ct-secao">
+                <h2 class="section-title">Contratos</h2>
+                <div class="table-card">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Contrato</th>
+                                <th>Serviço</th>
+                                <th id="col-parte">Profissional</th>
+                                <th>Valor</th>
+                                <th>Situação</th>
+                                <th>Próximo passo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contratos">
+                            <tr><td colspan="6"><div class="loading">Carregando…</div></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+    <div id="footer"></div>
+    <script type="module" src="../js/pages/contratos.js"></script>
+</body>
+</html>

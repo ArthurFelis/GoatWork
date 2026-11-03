@@ -1,19 +1,111 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GoatWork - pagamento</title>
-  <link rel="stylesheet" href="../css/base/variables.css">
-  <link rel="stylesheet" href="../css/base/reset.css">
-  <link rel="stylesheet" href="../css/components/navbar.css">
-  <link rel="stylesheet" href="../css/components/footer.css">
-  <link rel="stylesheet" href="../css/pages/pagamento.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c1e44">
+    <title>Pagamento — GoatWork</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c1e44'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23fe893c'%3EG%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/base/variables.css">
+    <link rel="stylesheet" href="../css/base/reset.css">
+    <link rel="stylesheet" href="../css/base/typography.css">
+    <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/footer.css">
+    <link rel="stylesheet" href="../css/components/buttons.css">
+    <link rel="stylesheet" href="../css/components/forms.css">
+    <link rel="stylesheet" href="../css/components/cards.css">
+    <link rel="stylesheet" href="../css/pages/pagamento.css">
 </head>
 <body>
-  <div id="navbar"></div>
-  <main></main>
-  <div id="footer"></div>
-  <script type="module" src="../js/pages/pagamento.js"></script>
+    <div id="navbar"></div>
+    <main class="page">
+        <div class="container">
+            <header class="np-head">
+                <p class="page-eyebrow" id="numero">Contrato</p>
+                <h1 class="page-title">Pagamento</h1>
+                <p class="page-subtitle">O valor fica retido pela GoatWork e só é liberado ao trabalhador depois que você aprovar o serviço.</p>
+            </header>
+
+            <div class="layout-side pg-layout">
+                <section class="card pg-card">
+                    <span class="label">Forma de pagamento</span>
+                    <div class="segmented pg-metodo" role="group" aria-label="Forma de pagamento" id="metodo">
+                        <button type="button" data-metodo="PIX" aria-pressed="true">Pix</button>
+                        <button type="button" data-metodo="CARTAO" aria-pressed="false">Cartão</button>
+                    </div>
+
+                    <div class="pg-box" id="painel-pix">
+                        <div class="pg-qr" aria-hidden="true">
+                            <span>QR Code Pix<br>(gerado pelo gateway)</span>
+                        </div>
+                        <div class="pg-pix">
+                            <h2>Pague com Pix</h2>
+                            <ol>
+                                <li>Abra o app do seu banco</li>
+                                <li>Escaneie o QR Code ou use o copia e cola</li>
+                                <li>Confirme o pagamento de <span id="valor-pix">—</span></li>
+                            </ol>
+                            <div class="pg-copia">
+                                <label class="sr-only" for="pix-codigo">Pix copia e cola</label>
+                                <input class="input" id="pix-codigo" type="text" readonly value="">
+                                <button class="btn btn-secondary" type="button" id="btn-copiar">Copiar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="pg-box pg-cartao" id="painel-cartao" hidden novalidate>
+                        <div class="field">
+                            <label class="label" for="cartao-numero">Número do cartão</label>
+                            <input class="input" id="cartao-numero" inputmode="numeric" autocomplete="cc-number" placeholder="0000 0000 0000 0000">
+                        </div>
+                        <div class="field">
+                            <label class="label" for="cartao-nome">Nome impresso no cartão</label>
+                            <input class="input" id="cartao-nome" autocomplete="cc-name" placeholder="Como está no cartão">
+                        </div>
+                        <div class="field-row">
+                            <div>
+                                <label class="label" for="cartao-validade">Validade</label>
+                                <input class="input" id="cartao-validade" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/AA">
+                            </div>
+                            <div>
+                                <label class="label" for="cartao-cvv">CVV</label>
+                                <input class="input" id="cartao-cvv" inputmode="numeric" autocomplete="cc-csc" placeholder="000" maxlength="4">
+                            </div>
+                        </div>
+                        <p class="hint">Os dados do cartão vão direto para o gateway de pagamento e não ficam salvos na GoatWork.</p>
+                    </form>
+
+                    <span class="label pg-situacao-label">Situação do pagamento</span>
+                    <ol class="stepper" id="situacao">
+                        <li data-etapa="PENDENTE"><span class="num">1</span>Pendente</li>
+                        <li data-etapa="EM_CUSTODIA"><span class="num">2</span>Em custódia</li>
+                        <li data-etapa="LIBERADO"><span class="num">3</span>Liberado ao trabalhador</li>
+                    </ol>
+                </section>
+
+                <aside class="side-stack">
+                    <section class="card-navy pg-total">
+                        <span class="small">Total protegido</span>
+                        <strong class="total" id="total">—</strong>
+                        <dl class="pg-valores">
+                            <div><dt>Valor do serviço</dt><dd id="v-servico">—</dd></div>
+                            <div><dt id="t-taxa">Taxa da plataforma</dt><dd id="v-taxa">—</dd></div>
+                            <div><dt>Trabalhador recebe</dt><dd id="v-liquido">—</dd></div>
+                        </dl>
+                        <div id="acao"></div>
+                    </section>
+                    <section class="card-soft pg-servico">
+                        <h3>Serviço</h3>
+                        <p id="servico">—</p>
+                    </section>
+                </aside>
+            </div>
+        </div>
+    </main>
+    <div id="footer"></div>
+    <script type="module" src="../js/pages/pagamento.js"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 namespace GoatWork.Domain.Enums;
 
+// Valores idênticos aos ENUMs do banco (database/GoatWork.sql)
 public enum TipoUsuario
 {
-    // TODO: valores do ENUM correspondente no banco
+    CLIENTE, TRABALHADOR, ADMIN
 }

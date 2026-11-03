@@ -1,18 +1,34 @@
-/* Paleta extraída do Figma — ajuste os valores exatos no Dev Mode */
+/* Paleta e medidas extraídas das telas do Figma (GoatWork — Telas e fluxo) */
 :root {
-   --font-family: 'Manrope', sans-serif;
-    --gw-navy: #102044;
-    --gw-navy-2: #1b315b;
+    --font-family: 'Manrope', system-ui, sans-serif;
+    --font-display: 'Sora', 'Manrope', system-ui, sans-serif;
 
-    --gw-orange: #f16a24;
-    --gw-orange-dark: #b74608;
+    --gw-navy: #0c1e44;          /* navbar, rodapé, botões primários */
+    --gw-navy-2: #1b2d5d;        /* painel de termos, avatar */
+    --gw-orange: #fe893c;        /* destaque, texto dos botões primários */
+    --gw-orange-dark: #e9742a;
+    --gw-brown: #993c0b;         /* títulos */
+    --gw-brown-2: #8a3a0c;       /* rótulos de formulário */
+    --gw-ink: #3a2f2a;           /* texto principal */
+    --gw-muted: #7b6f68;         /* texto secundário */
 
-    --gw-cream: #fff0e2;
-    --gw-ink: #182238;
-    --gw-muted: #737b89;
-    --gw-border: #e9e5e0;
+    --gw-cream: #f7e9dc;         /* cards suaves, abas inativas */
+    --gw-cream-2: #fdeddd;       /* faixa "Mais bem avaliados" */
+    --gw-cream-3: #faf3eb;       /* caixas de confirmação */
+    --gw-peach: #fed5af;         /* selo, conversa ativa */
+    --gw-sand: #ede3d7;          /* botão secundário */
+    --gw-blue-soft: #e5e9f4;     /* status "aceito" / "entrega enviada" */
+    --gw-disabled: #6b728f;
+
+    --gw-border: #e8e0d6;
+    --gw-input-border: #e1dad2;
     --gw-white: #ffffff;
+    --gw-bg-chat: #f4f4f4;
 
-    --gw-shadow: 0 18px 50px rgba(16, 32, 68, 0.12);
+    --gw-radius: 14px;
+    --gw-radius-sm: 8px;
+    --gw-shadow: 0 10px 30px rgba(12, 30, 68, 0.08);
+
+    --gw-container: 1084px;
+    --gw-nav-h: 66px;
 }
-

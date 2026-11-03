@@ -1,19 +1,96 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GoatWork - revisao-briefing</title>
-  <link rel="stylesheet" href="../css/base/variables.css">
-  <link rel="stylesheet" href="../css/base/reset.css">
-  <link rel="stylesheet" href="../css/components/navbar.css">
-  <link rel="stylesheet" href="../css/components/footer.css">
-  <link rel="stylesheet" href="../css/pages/revisao-briefing.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c1e44">
+    <title>Revise seu briefing — GoatWork</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c1e44'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23fe893c'%3EG%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/base/variables.css">
+    <link rel="stylesheet" href="../css/base/reset.css">
+    <link rel="stylesheet" href="../css/base/typography.css">
+    <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/footer.css">
+    <link rel="stylesheet" href="../css/components/buttons.css">
+    <link rel="stylesheet" href="../css/components/forms.css">
+    <link rel="stylesheet" href="../css/components/cards.css">
+    <link rel="stylesheet" href="../css/pages/revisao-briefing.css">
 </head>
 <body>
-  <div id="navbar"></div>
-  <main></main>
-  <div id="footer"></div>
-  <script type="module" src="../js/pages/revisao-briefing.js"></script>
+    <div id="navbar"></div>
+    <main class="page">
+        <div class="container">
+            <header class="np-head">
+                <h1 class="page-title" id="titulo">Revise seu briefing</h1>
+                <p class="page-subtitle" id="subtitulo">A IA montou este resumo a partir da sua conversa. Confira e ajuste antes de enviar.</p>
+            </header>
+
+            <div class="layout-side layout-side--wide">
+                <form class="card rb-card" id="form-briefing" novalidate>
+                    <div class="loading" id="carregando">Carregando briefing…</div>
+
+                    <div id="conteudo" hidden>
+                        <p class="form-error" id="erro" hidden></p>
+
+                        <div class="rb-topo">
+                            <span class="badge" id="categoria"></span>
+                            <span class="rb-gerado">Gerado pela IA GoatWork</span>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="resumo">Resumo</label>
+                            <textarea class="rb-resumo" id="resumo" rows="1" maxlength="1000"></textarea>
+                        </div>
+
+                        <div class="field">
+                            <div class="rb-label-linha">
+                                <span class="label">Requisitos</span>
+                                <button class="rb-editar" type="button" id="btn-editar-req">Editar</button>
+                            </div>
+                            <ul class="bullets rb-requisitos" id="requisitos"></ul>
+                            <textarea class="textarea rb-req-edicao" id="requisitos-edicao" hidden aria-label="Requisitos, um por linha"></textarea>
+                        </div>
+
+                        <div class="field field-row">
+                            <div>
+                                <label class="label" for="prazo">Prazo desejado</label>
+                                <input class="input" id="prazo" type="text" inputmode="numeric" placeholder="dd/mm/aaaa">
+                            </div>
+                            <div>
+                                <label class="label" for="orcamento">Orçamento estimado</label>
+                                <input class="input" id="orcamento" type="text" inputmode="numeric" placeholder="R$ 0,00">
+                            </div>
+                        </div>
+
+                        <label class="check check-box" id="caixa-confirmo">
+                            <input type="checkbox" id="confirmo">
+                            <span>Revisei o briefing e confirmo que ele representa o que eu preciso.</span>
+                        </label>
+
+                        <div class="actions" id="acoes">
+                            <a class="btn btn-secondary" id="btn-voltar" href="#">Voltar à conversa com a IA</a>
+                            <button class="btn btn-primary" type="submit" id="btn-confirmar">Confirmar e enviar pedido</button>
+                        </div>
+                    </div>
+                </form>
+
+                <aside class="side-stack">
+                    <div class="card-navy">
+                        <h3>O que acontece agora</h3>
+                        <p class="rb-navy-txt">Ao confirmar, o pedido é enviado como convite aos profissionais da categoria <strong class="rb-cat" id="categoria-side">—</strong>.</p>
+                        <p class="rb-navy-txt">O chat só abre quando um profissional aceitar o convite.</p>
+                    </div>
+                    <div class="card-soft">
+                        Contatos externos (telefone, e-mail) não ficam visíveis. Toda a negociação acontece dentro da GoatWork.
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+    <div id="footer"></div>
+    <script type="module" src="../js/pages/revisao-briefing.js"></script>
 </body>
 </html>

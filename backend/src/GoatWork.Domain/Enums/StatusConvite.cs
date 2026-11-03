@@ -1,6 +1,7 @@
 namespace GoatWork.Domain.Enums;
 
+// Valores idênticos aos ENUMs do banco (database/GoatWork.sql)
 public enum StatusConvite
 {
-    // TODO: valores do ENUM correspondente no banco
+    ENVIADO, ACEITO, RECUSADO
 }

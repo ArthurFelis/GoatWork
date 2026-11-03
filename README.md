@@ -312,6 +312,29 @@ GoatWork/
 
 ---
 
+## ▶️ Como rodar
+
+**Pré-requisitos:** .NET 8 SDK e MySQL 8.
+
+1. Crie o banco: rode `database/GoatWork.sql` e depois `database/scripts/02-seed.sql`.
+   (Banco criado com a versão antiga do script? Rode `database/scripts/03-migracao-colunas-telas.sql`.)
+2. Ajuste `backend/src/GoatWork.Api/appsettings.json`: senha do MySQL em `ConnectionStrings:GoatWork` e uma `Jwt:Key` com 32+ caracteres.
+3. Na pasta `backend/`: `dotnet run --project src/GoatWork.Api`
+4. Abra **http://localhost:5080** — a API também serve o front-end (Swagger em `/swagger`).
+
+Na primeira execução a API cria as contas de exemplo (senha de todas: `Goat@1234`):
+
+| Perfil | E-mail |
+|---|---|
+| Cliente | gabriel@goatwork.com |
+| Trabalhador | carlos@goatwork.com (e ana, rafael, juliana, marcos, beatriz, diego, patricia @goatwork.com) |
+| Administrador | admin@goatwork.com |
+
+**IA de atendimento:** sem chave, funciona por regras (pergunta local/prazo e monta o briefing). Para usar o Claude, preencha `IA:ApiKey` no appsettings.
+**Pagamento:** gateway simulado (Pix aprova na hora; o cartão `4000 0000 0000 0002` é sempre recusado).
+
+---
+
 ## 🗺️ Roadmap
 
 - [x] Definição da ideia e do escopo
@@ -319,10 +342,10 @@ GoatWork/
 - [x] Modelo conceitual (MER) e diagrama (DER)
 - [x] Definição da stack tecnológica
 - [x] Modelo físico do banco de dados (scripts SQL)
-- [ ] Protótipo das telas (cadastro, chat, contrato, pagamento)
-- [ ] Integração com a IA de atendimento
-- [ ] Integração com gateway de pagamento (Pix e cartão)
-- [ ] Painel do administrador (disputas)
+- [x] Telas do Figma implementadas (front-end HTML/CSS/JS)
+- [x] Integração com a IA de atendimento (Claude ou regras)
+- [x] Gateway de pagamento simulado (Pix e cartão) — falta o gateway real
+- [x] Painel do administrador (disputas, usuários, contratos, termos)
 - [ ] Testes e validação
 - [ ] Publicação
 

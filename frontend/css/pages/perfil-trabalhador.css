@@ -1,0 +1,155 @@
+@import url("novo-pedido.css");
+
+.pf-layout {
+    display: grid;
+    grid-template-columns: 292px minmax(0, 1fr);
+    gap: 26px;
+    align-items: start;
+}
+
+.pf-resumo {
+    padding: 26px 22px;
+    text-align: center;
+}
+
+.pf-resumo .avatar {
+    margin: 0 auto 12px;
+}
+
+.pf-resumo h2 {
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.pf-sub {
+    margin-top: 8px;
+    color: var(--gw-muted);
+    font-size: 13.5px;
+}
+
+.pf-selo {
+    margin-top: 10px;
+    padding: 6px 13px;
+    font-size: 12.5px;
+}
+
+.pf-stats {
+    display: flex;
+    justify-content: center;
+    gap: 34px;
+    margin-top: 16px;
+}
+
+.pf-stats strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.pf-stats .nota {
+    color: var(--gw-brown);
+}
+
+.pf-stats .servicos {
+    color: var(--gw-navy);
+}
+
+.pf-stats span {
+    color: var(--gw-muted);
+    font-size: 12px;
+}
+
+.pf-verificacao p {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.pf-form {
+    padding: 30px 29px 28px;
+}
+
+.pf-bio {
+    min-height: 114px;
+}
+
+.pf-dados {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+}
+
+.pf-valor {
+    display: grid;
+    grid-template-columns: 1fr 98px;
+    gap: 8px;
+}
+
+.pf-atuacoes {
+    display: grid;
+    gap: 12px;
+}
+
+.pf-atuacao {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 216px 46px;
+    gap: 12px;
+    align-items: end;
+    padding: 14px 15px 14px;
+    border-radius: 10px;
+    background: var(--gw-cream-3);
+}
+
+.pf-atuacao label {
+    display: block;
+    margin-bottom: 6px;
+    color: #8b7b70;
+    font-size: 12px;
+}
+
+.pf-remover {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border: 1px solid #e3d8cc;
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--gw-brown);
+    font-size: 18px;
+}
+
+.pf-remover:hover {
+    border-color: var(--gw-brown);
+}
+
+.pf-add {
+    margin-top: 12px;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 1px dashed var(--gw-brown);
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--gw-brown);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.pf-add:hover {
+    background: var(--gw-cream-3);
+}
+
+@media (max-width: 900px) {
+    .pf-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .pf-dados {
+        grid-template-columns: 1fr;
+    }
+
+    .pf-atuacao {
+        grid-template-columns: 1fr 110px 46px;
+    }
+}

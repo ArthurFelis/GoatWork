@@ -1,19 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GoatWork - contrato</title>
-  <link rel="stylesheet" href="../css/base/variables.css">
-  <link rel="stylesheet" href="../css/base/reset.css">
-  <link rel="stylesheet" href="../css/components/navbar.css">
-  <link rel="stylesheet" href="../css/components/footer.css">
-  <link rel="stylesheet" href="../css/pages/contrato.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c1e44">
+    <title>Contrato — GoatWork</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c1e44'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23fe893c'%3EG%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/base/variables.css">
+    <link rel="stylesheet" href="../css/base/reset.css">
+    <link rel="stylesheet" href="../css/base/typography.css">
+    <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/footer.css">
+    <link rel="stylesheet" href="../css/components/buttons.css">
+    <link rel="stylesheet" href="../css/components/forms.css">
+    <link rel="stylesheet" href="../css/components/cards.css">
+    <link rel="stylesheet" href="../css/pages/contrato.css">
 </head>
 <body>
-  <div id="navbar"></div>
-  <main></main>
-  <div id="footer"></div>
-  <script type="module" src="../js/pages/contrato.js"></script>
+    <div id="navbar"></div>
+    <main class="page">
+        <div class="container">
+            <div class="layout-side layout-side--wide">
+                <article class="card ct-card" id="contrato">
+                    <div class="loading">Carregando contrato…</div>
+                </article>
+
+                <aside class="side-stack">
+                    <section class="card-outline ct-assinaturas">
+                        <h2>Assinaturas</h2>
+                        <div id="assinaturas"></div>
+                    </section>
+                    <section class="card-navy ct-total">
+                        <span class="small">Total protegido</span>
+                        <strong class="total" id="total">—</strong>
+                        <p class="small" id="nota-total">O valor só é liberado ao trabalhador após sua confirmação.</p>
+                        <div class="ct-acao" id="acao-pagamento"></div>
+                    </section>
+                    <a class="link ct-voltar" id="link-chat" href="chat.html">← Voltar ao chat</a>
+                </aside>
+            </div>
+        </div>
+    </main>
+    <div id="footer"></div>
+    <script type="module" src="../js/pages/contrato.js"></script>
 </body>
 </html>

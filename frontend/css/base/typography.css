@@ -1,0 +1,99 @@
+h1,
+h2,
+h3,
+h4 {
+    margin: 0;
+    font-family: var(--font-display);
+    color: var(--gw-brown);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+}
+
+p {
+    margin: 0;
+}
+
+/* Cabeçalho padrão das telas internas */
+.page {
+    padding: 44px 0 72px;
+}
+
+.page-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.page-eyebrow {
+    margin-bottom: 6px;
+    color: var(--gw-brown);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.page-title {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.page-subtitle {
+    margin-top: 8px;
+    color: var(--gw-muted);
+    font-size: 15px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--gw-brown-2);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.label small {
+    color: var(--gw-muted);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.muted {
+    color: var(--gw-muted);
+}
+
+.hint {
+    margin-top: 6px;
+    color: var(--gw-muted);
+    font-size: 12px;
+}
+
+.link {
+    color: var(--gw-brown);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.link:hover {
+    color: var(--gw-orange-dark);
+}
+
+.money {
+    font-family: var(--font-display);
+    color: var(--gw-orange);
+    font-weight: 700;
+}
+
+/* Cabeçalho simples (título + subtítulo) usado na maioria das telas */
+.np-head {
+    margin-bottom: 26px;
+}

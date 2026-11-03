@@ -1,0 +1,118 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 0 26px;
+    border: 1px solid transparent;
+    border-radius: var(--gw-radius-sm);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s, transform 0.05s;
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+/* Navy com texto laranja: "Continuar com a IA", "Enviar", "Assinar"... */
+.btn-primary {
+    background: var(--gw-navy);
+    color: var(--gw-orange);
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: #142a5a;
+}
+
+/* Bege: "Salvar rascunho", "Cancelar", "Ver Profissionais" */
+.btn-secondary {
+    background: var(--gw-sand);
+    color: #5a463b;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: #e5d8c9;
+}
+
+/* Contorno: "Rejeitar entrega", "Recusar", "Analisar" */
+.btn-outline {
+    background: #ffffff;
+    border-color: #ddd3c8;
+    color: #5a463b;
+}
+
+.btn-outline:hover:not(:disabled) {
+    border-color: var(--gw-brown);
+    color: var(--gw-brown);
+}
+
+/* Laranja sólido: "Pagar R$ ..." */
+.btn-orange {
+    background: var(--gw-orange);
+    color: var(--gw-navy);
+}
+
+.btn-orange:hover:not(:disabled) {
+    background: var(--gw-orange-dark);
+}
+
+/* Estado desabilitado do Figma (cinza azulado) */
+.btn:disabled {
+    background: var(--gw-disabled);
+    border-color: transparent;
+    color: #e9ebf2;
+}
+
+.btn-outline:disabled,
+.btn-secondary:disabled {
+    background: #f1ece6;
+    color: #aaa;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn-sm {
+    min-height: 36px;
+    padding: 0 16px;
+    font-size: 13px;
+}
+
+.btn.is-loading {
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+}
+
+.btn.is-loading::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--gw-orange);
+    border-right-color: transparent;
+    animation: gw-spin 0.7s linear infinite;
+}
+
+@keyframes gw-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 20px;
+    margin-top: 22px;
+    border-top: 1px solid var(--gw-border);
+}

@@ -1,0 +1,120 @@
+/* Compartilhado por Entrar e Cadastro */
+.auth-page {
+    padding: 58px 0 90px;
+}
+
+.auth-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 521px) minmax(0, 480px);
+    justify-content: center;
+    gap: 24px;
+    width: min(1025px, calc(100% - 32px));
+    margin-inline: auto;
+    align-items: start;
+}
+
+.auth-grid--cadastro {
+    grid-template-columns: minmax(0, 563px) minmax(0, 480px);
+    width: min(1067px, calc(100% - 32px));
+}
+
+.auth-card {
+    padding: 30px 29px 28px;
+}
+
+.auth-title {
+    margin-bottom: 18px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.auth-card > .segmented {
+    margin-bottom: 18px;
+}
+
+.auth-card .field {
+    margin-bottom: 16px;
+}
+
+.auth-check {
+    margin: 4px 0 20px 3px;
+    font-size: 13px;
+}
+
+.link-termos {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.auth-submit {
+    min-height: 48px;
+}
+
+.auth-alt {
+    margin-top: 16px;
+    color: var(--gw-muted);
+    font-size: 13.5px;
+    text-align: center;
+}
+
+.auth-alt .link {
+    color: var(--gw-brown);
+}
+
+/* Painel azul dos termos */
+.termos-painel {
+    padding: 28px 28px 30px;
+    border-radius: var(--gw-radius);
+    background: var(--gw-navy-2);
+    color: #ffffff;
+}
+
+.termos-painel h2 {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.termos-sub {
+    margin-top: 4px;
+    color: #c9d1e6;
+    font-size: 13px;
+}
+
+.termos-lista {
+    display: grid;
+    gap: 16px;
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 13.5px;
+    line-height: 1.5;
+}
+
+.termos-lista li {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 13px;
+    color: #eef1f8;
+}
+
+.termos-lista .num-dot {
+    background: var(--gw-navy);
+    margin-top: 1px;
+}
+
+.termos-lista li.is-destaque {
+    color: var(--gw-orange);
+    font-weight: 700;
+}
+
+@media (max-width: 900px) {
+    .auth-grid,
+    .auth-grid--cadastro {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-page {
+        padding-top: 28px;
+    }
+}

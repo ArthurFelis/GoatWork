@@ -1,19 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GoatWork - novo-pedido</title>
-  <link rel="stylesheet" href="../css/base/variables.css">
-  <link rel="stylesheet" href="../css/base/reset.css">
-  <link rel="stylesheet" href="../css/components/navbar.css">
-  <link rel="stylesheet" href="../css/components/footer.css">
-  <link rel="stylesheet" href="../css/pages/novo-pedido.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c1e44">
+    <title>Novo pedido — GoatWork</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c1e44'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23fe893c'%3EG%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/base/variables.css">
+    <link rel="stylesheet" href="../css/base/reset.css">
+    <link rel="stylesheet" href="../css/base/typography.css">
+    <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/footer.css">
+    <link rel="stylesheet" href="../css/components/buttons.css">
+    <link rel="stylesheet" href="../css/components/forms.css">
+    <link rel="stylesheet" href="../css/components/cards.css">
+    <link rel="stylesheet" href="../css/pages/novo-pedido.css">
 </head>
 <body>
-  <div id="navbar"></div>
-  <main></main>
-  <div id="footer"></div>
-  <script type="module" src="../js/pages/novo-pedido.js"></script>
+    <div id="navbar"></div>
+    <main class="page">
+        <div class="container">
+            <header class="np-head">
+                <h1 class="page-title">Novo pedido</h1>
+                <p class="page-subtitle">Conte o que você precisa. Nossa IA faz as perguntas e monta o briefing.</p>
+            </header>
+
+            <ol class="stepper np-stepper" aria-label="Etapas do pedido">
+                <li class="is-active" aria-current="step"><span class="num">1</span>Descrever</li>
+                <li><span class="num">2</span>Conversa com a IA</li>
+                <li><span class="num">3</span>Revisar briefing</li>
+                <li><span class="num">4</span>Enviar aos profissionais</li>
+            </ol>
+
+            <div class="layout-side layout-side--wide np-layout">
+                <form class="card np-card" id="form-pedido" novalidate>
+                    <p class="form-error" id="erro" hidden></p>
+
+                    <div class="np-preferido" id="preferido" hidden></div>
+
+                    <div class="field">
+                        <span class="label">Categoria do serviço</span>
+                        <div class="chips chips--lg" id="categorias" role="radiogroup" aria-label="Categoria do serviço">
+                            <span class="muted">Carregando…</span>
+                        </div>
+                    </div>
+
+                    <div class="field np-descricao">
+                        <label class="label" for="descricao">O que você precisa?</label>
+                        <textarea class="textarea" id="descricao" maxlength="2000" placeholder="Ex.: Preciso instalar 4 tomadas e trocar o quadro de energia da minha casa."></textarea>
+                        <p class="hint">Não precisa ser detalhado: a IA vai perguntar o que faltar.</p>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn btn-secondary" type="button" id="btn-rascunho">Salvar rascunho</button>
+                        <button class="btn btn-primary" type="submit" id="btn-continuar">Continuar com a IA</button>
+                    </div>
+                </form>
+
+                <aside class="card-soft np-dicas">
+                    <h3>Dicas para um bom pedido</h3>
+                    <ol class="num-list">
+                        <li><span class="num-dot">1</span><span>Diga o que precisa ser feito e onde.</span></li>
+                        <li><span class="num-dot">2</span><span>Informe o prazo desejado, se houver.</span></li>
+                        <li><span class="num-dot">3</span><span>Se tiver um valor em mente, conte para a IA.</span></li>
+                    </ol>
+                    <p class="np-dicas-nota">Seu pedido só é enviado aos profissionais depois que você confirmar o briefing.</p>
+                </aside>
+            </div>
+        </div>
+    </main>
+    <div id="footer"></div>
+    <script type="module" src="../js/pages/novo-pedido.js"></script>
 </body>
 </html>

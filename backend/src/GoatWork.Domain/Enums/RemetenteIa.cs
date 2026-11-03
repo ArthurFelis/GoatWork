@@ -1,6 +1,7 @@
 namespace GoatWork.Domain.Enums;
 
+// Valores idênticos aos ENUMs do banco (database/GoatWork.sql)
 public enum RemetenteIa
 {
-    // TODO: valores do ENUM correspondente no banco
+    CLIENTE, IA
 }

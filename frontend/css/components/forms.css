@@ -1,0 +1,116 @@
+.field {
+    margin-bottom: 18px;
+}
+
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 14px;
+}
+
+.input,
+.select,
+.textarea {
+    width: 100%;
+    min-height: 46px;
+    padding: 11px 15px;
+    border: 1px solid var(--gw-input-border);
+    border-radius: var(--gw-radius-sm);
+    background: #ffffff;
+    color: var(--gw-ink);
+    font-size: 15px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+    color: #8a8580;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    outline: none;
+    border-color: var(--gw-orange);
+    box-shadow: 0 0 0 3px rgba(254, 137, 60, 0.15);
+}
+
+.input.is-invalid,
+.textarea.is-invalid {
+    border-color: #d64b2a;
+}
+
+.textarea {
+    min-height: 160px;
+    resize: vertical;
+    line-height: 1.55;
+}
+
+.select {
+    appearance: auto;
+}
+
+/* Abas segmentadas: "Sou Cliente | Sou Trabalhador", "Pix | Cartão", "Física | Jurídica" */
+.segmented {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
+    padding: 0;
+    border-radius: var(--gw-radius-sm);
+    background: var(--gw-cream);
+}
+
+.segmented button {
+    min-height: 46px;
+    border: 0;
+    border-radius: var(--gw-radius-sm);
+    background: transparent;
+    color: #5a463b;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.segmented button[aria-pressed="true"] {
+    background: var(--gw-navy);
+    color: #ffffff;
+}
+
+/* Checkbox de aceite */
+.check {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: var(--gw-brown-2);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.check input {
+    width: 17px;
+    height: 17px;
+    margin: 2px 0 0;
+    flex-shrink: 0;
+    accent-color: var(--gw-navy);
+}
+
+.check-box {
+    padding: 15px 20px;
+    border-radius: var(--gw-radius-sm);
+    background: var(--gw-cream-3);
+}
+
+.form-error {
+    margin: 0 0 14px;
+    padding: 10px 14px;
+    border-radius: var(--gw-radius-sm);
+    background: #fdecea;
+    color: #a1300f;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+    .field-row {
+        grid-template-columns: 1fr;
+    }
+}

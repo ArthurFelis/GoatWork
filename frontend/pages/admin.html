@@ -1,19 +1,115 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GoatWork - admin</title>
-  <link rel="stylesheet" href="../css/base/variables.css">
-  <link rel="stylesheet" href="../css/base/reset.css">
-  <link rel="stylesheet" href="../css/components/navbar.css">
-  <link rel="stylesheet" href="../css/components/footer.css">
-  <link rel="stylesheet" href="../css/pages/admin.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c1e44">
+    <title>Painel do administrador — GoatWork</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c1e44'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23fe893c'%3EG%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/base/variables.css">
+    <link rel="stylesheet" href="../css/base/reset.css">
+    <link rel="stylesheet" href="../css/base/typography.css">
+    <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/footer.css">
+    <link rel="stylesheet" href="../css/components/buttons.css">
+    <link rel="stylesheet" href="../css/components/forms.css">
+    <link rel="stylesheet" href="../css/components/cards.css">
+    <link rel="stylesheet" href="../css/pages/admin.css">
 </head>
 <body>
-  <div id="navbar"></div>
-  <main></main>
-  <div id="footer"></div>
-  <script type="module" src="../js/pages/admin.js"></script>
+    <div id="navbar"></div>
+    <main class="page adm-page">
+        <div class="adm-container">
+            <header class="np-head">
+                <h1 class="page-title" id="titulo">Painel do administrador</h1>
+                <p class="page-subtitle" id="subtitulo">Analise disputas consultando o chat e o contrato, e registre a decisão.</p>
+            </header>
+
+            <!-- Disputas -->
+            <section id="aba-disputas" hidden>
+                <div class="adm-stats">
+                    <div class="adm-stat"><strong class="laranja" id="n-abertas">0</strong><span>Abertas</span></div>
+                    <div class="adm-stat"><strong class="navy" id="n-analise">0</strong><span>Em análise</span></div>
+                    <div class="adm-stat"><strong class="marrom" id="n-resolvidas">0</strong><span>Resolvidas</span></div>
+                </div>
+
+                <div class="adm-grid">
+                    <section class="card adm-tabela">
+                        <div class="chips" id="filtros" role="tablist" aria-label="Filtrar disputas">
+                            <button class="chip" type="button" data-status="" aria-pressed="true">Todas</button>
+                            <button class="chip" type="button" data-status="ABERTA" aria-pressed="false">Abertas</button>
+                            <button class="chip" type="button" data-status="EM_ANALISE" aria-pressed="false">Em análise</button>
+                            <button class="chip" type="button" data-status="RESOLVIDA" aria-pressed="false">Resolvidas</button>
+                        </div>
+                        <div class="adm-scroll">
+                            <table class="table adm-table">
+                                <thead>
+                                    <tr><th>Disputa</th><th>Contrato</th><th>Aberta por</th><th>Motivo</th><th>Situação</th><th></th></tr>
+                                </thead>
+                                <tbody id="disputas"><tr><td colspan="6"><div class="loading"></div></td></tr></tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <aside class="card adm-detalhe" id="detalhe">
+                        <div class="empty">Selecione uma disputa para analisar.</div>
+                    </aside>
+                </div>
+            </section>
+
+            <!-- Contratos -->
+            <section id="aba-contratos" hidden>
+                <div class="table-card">
+                    <table class="table">
+                        <thead><tr><th>Contrato</th><th>Cliente</th><th>Trabalhador</th><th>Valor</th><th>Contrato</th><th>Pagamento</th><th></th></tr></thead>
+                        <tbody id="contratos"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Usuários -->
+            <section id="aba-usuarios" hidden>
+                <div class="chips adm-filtro-usuarios" id="filtro-usuarios">
+                    <button class="chip" type="button" data-tipo="" aria-pressed="true">Todos</button>
+                    <button class="chip" type="button" data-tipo="CLIENTE" aria-pressed="false">Clientes</button>
+                    <button class="chip" type="button" data-tipo="TRABALHADOR" aria-pressed="false">Trabalhadores</button>
+                    <button class="chip" type="button" data-tipo="ADMIN" aria-pressed="false">Administradores</button>
+                </div>
+                <div class="table-card">
+                    <table class="table">
+                        <thead><tr><th>Nome</th><th>E-mail</th><th>Perfil</th><th>Situação</th><th>Verificação</th><th>Cadastro</th><th></th></tr></thead>
+                        <tbody id="usuarios"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Termos -->
+            <section id="aba-termos" hidden>
+                <div class="adm-termos">
+                    <section class="card">
+                        <h2 class="section-title">Publicar nova versão</h2>
+                        <form id="form-termo" novalidate>
+                            <div class="field">
+                                <label class="label" for="versao">Versão</label>
+                                <input class="input" id="versao" placeholder="Ex.: 1.1" maxlength="20">
+                            </div>
+                            <div class="field">
+                                <label class="label" for="texto-termo">Itens dos termos <small>(um por linha; comece com ! para destacar)</small></label>
+                                <textarea class="textarea" id="texto-termo" style="min-height:260px"></textarea>
+                            </div>
+                            <p class="hint">Ao publicar, todos os usuários aceitam a nova versão no próximo login (data, hora e IP ficam registrados).</p>
+                            <div class="actions"><button class="btn btn-primary" type="submit" id="btn-publicar">Publicar versão</button></div>
+                        </form>
+                    </section>
+                    <aside class="card-outline" id="versoes"></aside>
+                </div>
+            </section>
+        </div>
+    </main>
+    <div id="footer"></div>
+    <script type="module" src="../js/pages/admin.js"></script>
 </body>
 </html>
