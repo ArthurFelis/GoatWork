@@ -24,6 +24,7 @@ public interface IAppDbContext
     DbSet<Entrega> Entregas { get; }
     DbSet<Disputa> Disputas { get; }
     DbSet<Avaliacao> Avaliacoes { get; }
+    DbSet<Saque> Saques { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

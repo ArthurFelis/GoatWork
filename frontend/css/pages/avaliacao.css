@@ -29,10 +29,10 @@
     place-items: center;
     width: 51px;
     height: 51px;
-    border: 1px solid #e3d8cc;
+    border: 1px solid var(--gw-border-soft);
     border-radius: 9px;
-    background: #ffffff;
-    color: #a99a8e;
+    background: var(--gw-surface);
+    color: var(--gw-muted-4);
     transition: background-color 0.12s, transform 0.08s;
 }
 
@@ -47,8 +47,8 @@
 
 .estrela.is-on {
     border-color: transparent;
-    background: #fde6d2;
-    color: #e8590c;
+    background: var(--gw-peach-soft);
+    color: var(--gw-star);
 }
 
 .estrela.is-on svg {
@@ -71,8 +71,8 @@
 
 .av-resumo p {
     padding-bottom: 14px;
-    border-bottom: 1px solid #ead2bd;
-    color: #6a564b;
+    border-bottom: 1px solid var(--gw-divider-warm);
+    color: var(--gw-text-soft);
     font-size: 14.5px;
 }
 

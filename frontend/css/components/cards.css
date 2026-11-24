@@ -10,6 +10,12 @@
     grid-template-columns: minmax(0, 1fr) 313px;
 }
 
+/* Evita que tabelas largas estiquem a coluna (e a página) no celular */
+.layout-side > *,
+.side-stack > * {
+    min-width: 0;
+}
+
 .side-stack {
     display: grid;
     gap: 18px;
@@ -27,7 +33,7 @@
     padding: 30px;
     border: 1px solid var(--gw-border);
     border-radius: var(--gw-radius);
-    background: #ffffff;
+    background: var(--gw-surface);
 }
 
 .card--shadow {
@@ -39,7 +45,7 @@
     padding: 22px 24px;
     border-radius: var(--gw-radius);
     background: var(--gw-cream);
-    color: #6a564b;
+    color: var(--gw-text-soft);
     font-size: 13.5px;
 }
 
@@ -80,9 +86,9 @@
     padding: 20px 22px;
     border: 1px solid var(--gw-border);
     border-radius: var(--gw-radius);
-    background: #ffffff;
+    background: var(--gw-surface);
     font-size: 13px;
-    color: #6a564b;
+    color: var(--gw-text-soft);
 }
 
 /* Faixa de informações (Cliente | Trabalhador | Valor...) */
@@ -97,7 +103,7 @@
 }
 
 .info-strip dt {
-    color: #8b7b70;
+    color: var(--gw-muted-2);
     font-size: 12px;
 }
 
@@ -127,34 +133,34 @@
 }
 
 .badge--peach {
-    background: #fde6d2;
-    color: #8a3a0c;
+    background: var(--gw-peach-soft);
+    color: var(--gw-peach-fg);
 }
 
 .badge--blue {
     background: var(--gw-blue-soft);
-    color: var(--gw-navy);
+    color: var(--gw-navy-text);
 }
 
 .badge--sand {
-    background: #ece3d8;
-    color: #6b4e3c;
+    background: var(--gw-badge-sand-bg);
+    color: var(--gw-badge-sand-fg);
 }
 
 .badge--green {
-    background: #e1f2e6;
-    color: #1d6b39;
+    background: var(--gw-green-bg);
+    color: var(--gw-green);
 }
 
 .badge--red {
-    background: #fbe3dd;
-    color: #a1300f;
+    background: var(--gw-red-bg);
+    color: var(--gw-red);
 }
 
 .badge--outline {
-    border: 1px solid #ddd3c8;
-    background: #ffffff;
-    color: #5a463b;
+    border: 1px solid var(--gw-border-btn);
+    background: var(--gw-surface);
+    color: var(--gw-text-strong);
 }
 
 /* ---------- Chips (filtros de categoria / abas) ---------- */
@@ -170,13 +176,13 @@
     border: 0;
     border-radius: 999px;
     background: var(--gw-cream);
-    color: #5a463b;
+    color: var(--gw-text-strong);
     font-size: 14px;
     font-weight: 600;
 }
 
 .chip:hover {
-    background: #f2dcc8;
+    background: var(--gw-chip-hover);
 }
 
 .chip[aria-pressed="true"] {
@@ -208,7 +214,7 @@
     padding: 0 16px 0 10px;
     border-radius: 999px;
     background: var(--gw-cream);
-    color: #5a463b;
+    color: var(--gw-text-strong);
     font-size: 13px;
     font-weight: 700;
 }
@@ -219,7 +225,7 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: #ffffff;
+    background: var(--gw-surface);
     color: var(--gw-ink);
     font-size: 11px;
     font-weight: 800;
@@ -329,7 +335,7 @@
 /* ---------- Estados ---------- */
 .empty {
     padding: 34px 24px;
-    border: 1px dashed #e2d6c9;
+    border: 1px dashed var(--gw-border-dashed);
     border-radius: var(--gw-radius);
     color: var(--gw-muted);
     text-align: center;
@@ -384,7 +390,7 @@
 }
 
 .gw-toast--erro {
-    background: #a1300f;
+    background: var(--gw-red);
 }
 
 .gw-toast--ok {
@@ -403,7 +409,7 @@
     padding: 8px 12px 10px;
     border: 1px solid var(--gw-border);
     border-radius: var(--gw-radius);
-    background: #ffffff;
+    background: var(--gw-surface);
     overflow-x: auto;
 }
 
@@ -416,7 +422,7 @@
 .table th {
     padding: 16px 12px 12px;
     border-bottom: 1px solid var(--gw-border);
-    color: #6a564b;
+    color: var(--gw-text-soft);
     font-size: 12.5px;
     font-weight: 600;
     text-align: left;

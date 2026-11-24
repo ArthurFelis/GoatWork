@@ -24,7 +24,7 @@ function card(c) {
     }
     const acoes = c.status === 'ACEITO'
         ? `<div class="cv-acoes cv-acoes--entre">
-               <span class="badge badge--blue">${CHECK} Convite aceito</span>
+               <span class="badge badge--blue">${CHECK} Em negociação</span>
                <a class="btn btn-primary" href="chat.html?chat=${c.idChat}">Abrir chat</a>
            </div>`
         : `<div class="cv-acoes">
@@ -52,7 +52,7 @@ function card(c) {
 
 const VAZIO = {
     ENVIADO: '<strong>Nenhum convite pendente</strong>Mantenha suas categorias de atuação atualizadas em <a class="link" href="perfil-trabalhador.html">Meu perfil</a> para receber pedidos compatíveis.',
-    ACEITO: '<strong>Nenhum convite aceito ainda</strong>Os convites aceitos abrem um chat com o cliente.',
+    ACEITO: '<strong>Nenhuma negociação em andamento</strong>Os convites aceitos abrem um chat com o cliente.',
     RECUSADO: '<strong>Nenhum convite recusado</strong>'
 };
 

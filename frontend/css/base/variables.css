@@ -29,6 +29,133 @@
     --gw-radius-sm: 8px;
     --gw-shadow: 0 10px 30px rgba(12, 30, 68, 0.08);
 
+    /* Tokens de tema (claro). O modo escuro redefine os mesmos nomes abaixo. */
+    --gw-bg: #ffffff;
+    --gw-surface: #ffffff;
+    --gw-nav-bg: #0c1e44;
+    --gw-navy-text: #0c1e44;
+    --gw-muted-2: #8b7b70;
+    --gw-muted-3: #9b8b80;
+    --gw-muted-4: #a99a8e;
+    --gw-placeholder: #8a8580;
+    --gw-text-soft: #6a564b;
+    --gw-text-strong: #5a463b;
+    --gw-text-warm: #7d6a5d;
+    --gw-text-body: #4f433d;
+    --gw-badge-sand-fg: #6b4e3c;
+    --gw-badge-sand-bg: #ece3d8;
+    --gw-green: #1d6b39;
+    --gw-green-bg: #e1f2e6;
+    --gw-red: #a1300f;
+    --gw-red-bg: #fbe3dd;
+    --gw-error-bg: #fdecea;
+    --gw-red-border: #d64b2a;
+    --gw-peach-soft: #fde6d2;
+    --gw-peach-fg: #8a3a0c;
+    --gw-pill-fg: #6a2c08;
+    --gw-border-warm: #f0dfcf;
+    --gw-divider-warm: #ead2bd;
+    --gw-border-soft: #e3d8cc;
+    --gw-border-btn: #ddd3c8;
+    --gw-border-dashed: #e2d6c9;
+    --gw-bubble: #e8ddd0;
+    --gw-surface-warm: #fffaf5;
+    --gw-conversa: #fdeedf;
+    --gw-conversa-hover: #fde3cb;
+    --gw-destaque-bg: #fdecd9;
+    --gw-destaque-border: #f8cfa6;
+    --gw-chip-hover: #f2dcc8;
+    --gw-sand-hover: #e5d8c9;
+    --gw-disabled-soft: #f1ece6;
+    --gw-disabled-fg: #aaaaaa;
+    --gw-qr-border: #ead9c8;
+    --gw-blocked-border: #c4733b;
+    --gw-stat-orange: #c4500f;
+    --gw-price: #b04a0e;
+    --gw-star: #e8590c;
+
+    color-scheme: light;
+
     --gw-container: 1084px;
     --gw-nav-h: 66px;
+}
+
+/* ------------------------------------------------------------------
+   Modo escuro: ativado pelo botão da lua/sol na barra de navegação
+   (atributo data-theme="dark" no <html>, salvo no navegador).
+   ------------------------------------------------------------------ */
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --gw-bg: #0d1424;
+    --gw-surface: #151e33;
+    --gw-nav-bg: #081026;
+    --gw-navy: #22396e;
+    --gw-navy-2: #2b4479;
+    --gw-navy-text: #c7d3f2;
+    --gw-brown: #f3a46b;
+    --gw-brown-2: #e9a173;
+    --gw-ink: #ece6e0;
+    --gw-muted: #a99f97;
+    --gw-white: #151e33;
+
+    --gw-cream: #1d2842;
+    --gw-cream-2: #111a2e;
+    --gw-cream-3: #18223a;
+    --gw-peach: #4a2f1c;
+    --gw-sand: #26314d;
+    --gw-blue-soft: #22325a;
+    --gw-disabled: #3a4566;
+    --gw-border: #2a3654;
+    --gw-input-border: #34405f;
+    --gw-bg-chat: #10182b;
+    --gw-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+    --gw-muted-2: #9c9189;
+    --gw-muted-3: #8f857e;
+    --gw-muted-4: #7f756e;
+    --gw-placeholder: #7c7670;
+    --gw-text-soft: #c9beb6;
+    --gw-text-strong: #e6dcd3;
+    --gw-text-warm: #c2b4aa;
+    --gw-text-body: #d6ccc4;
+    --gw-badge-sand-fg: #e2cdbd;
+    --gw-badge-sand-bg: #2b3550;
+    --gw-green: #6fd39a;
+    --gw-green-bg: #173a28;
+    --gw-red: #ff9a80;
+    --gw-red-bg: #4a1f17;
+    --gw-error-bg: #4a1f17;
+    --gw-red-border: #ff7a5c;
+    --gw-peach-soft: #4a2d1a;
+    --gw-peach-fg: #ffb787;
+    --gw-pill-fg: #ffc79c;
+    --gw-border-warm: #33405e;
+    --gw-divider-warm: #3a4766;
+    --gw-border-soft: #3a4766;
+    --gw-border-btn: #3a4766;
+    --gw-border-dashed: #3a4766;
+    --gw-bubble: #26314d;
+    --gw-surface-warm: #172038;
+    --gw-conversa: #1a2540;
+    --gw-conversa-hover: #223055;
+    --gw-destaque-bg: #3a2618;
+    --gw-destaque-border: #6b4325;
+    --gw-chip-hover: #26345a;
+    --gw-sand-hover: #2f3b5c;
+    --gw-disabled-soft: #222b44;
+    --gw-disabled-fg: #7d8597;
+    --gw-qr-border: #3a4766;
+    --gw-blocked-border: #c4733b;
+    --gw-stat-orange: #ff9b57;
+    --gw-price: #ffab73;
+    --gw-star: #ff8a3d;
+}
+
+/* Transição suave ao trocar de tema (desligada para quem prefere menos movimento) */
+@media (prefers-reduced-motion: no-preference) {
+    html.tema-trocando,
+    html.tema-trocando * {
+        transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease !important;
+    }
 }

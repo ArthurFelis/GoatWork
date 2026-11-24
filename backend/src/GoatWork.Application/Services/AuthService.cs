@@ -30,15 +30,19 @@ public class AuthService
         Validacao.Exigir(req.AceitouTermos, "É preciso aceitar os termos de uso para criar a conta.");
         Validacao.Exigir(!string.IsNullOrWhiteSpace(req.Nome) && req.Nome.Trim().Length >= 3, "Informe seu nome completo.");
         Validacao.Exigir(Validacao.EmailValido(req.Email), "Informe um e-mail válido.");
-        Validacao.Exigir(Validacao.CpfValido(req.Cpf), "Informe um CPF válido.");
-        Validacao.Exigir(!string.IsNullOrEmpty(req.Senha) && req.Senha.Length >= 8, "A senha precisa ter no mínimo 8 caracteres.");
+        // Pessoa jurídica (cliente ou trabalhador) se cadastra com CNPJ; pessoa física, com CPF
+        var juridica = string.Equals(req.TipoPessoa, "JURIDICA", StringComparison.OrdinalIgnoreCase);
+        if (juridica) Validacao.Exigir(Validacao.CnpjValido(req.Cpf), "Informe um CNPJ válido.");
+        else Validacao.Exigir(Validacao.CpfValido(req.Cpf), "Informe um CPF válido.");
+        var problemaSenha = Validacao.ProblemaSenha(req.Senha);
+        Validacao.Exigir(problemaSenha is null, problemaSenha ?? string.Empty);
 
         var email = req.Email.Trim().ToLowerInvariant();
         var cpf = Validacao.SoDigitos(req.Cpf);
         if (await _db.Usuarios.AnyAsync(u => u.Email == email))
             throw new RegraNegocioException("Já existe uma conta com este e-mail.");
         if (await _db.Usuarios.AnyAsync(u => u.Cpf == cpf))
-            throw new RegraNegocioException("Já existe uma conta com este CPF.");
+            throw new RegraNegocioException(juridica ? "Já existe uma conta com este CNPJ." : "Já existe uma conta com este CPF.");
 
         var usuario = new Usuario
         {
@@ -56,7 +60,7 @@ public class AuthService
         {
             usuario.Cliente = new Cliente
             {
-                TipoPessoa = string.Equals(req.TipoPessoa, "JURIDICA", StringComparison.OrdinalIgnoreCase) ? TipoPessoa.JURIDICA : TipoPessoa.FISICA,
+                TipoPessoa = juridica ? TipoPessoa.JURIDICA : TipoPessoa.FISICA,
                 NomeExibicao = string.IsNullOrWhiteSpace(req.NomeExibicao) ? null : req.NomeExibicao.Trim()
             };
         }
@@ -66,6 +70,7 @@ public class AuthService
             {
                 Profissao = string.IsNullOrWhiteSpace(req.Profissao) ? null : req.Profissao.Trim(),
                 Cidade = string.IsNullOrWhiteSpace(req.Cidade) ? null : req.Cidade.Trim(),
+                TipoPessoa = juridica ? TipoPessoa.JURIDICA : TipoPessoa.FISICA,
                 Verificado = false
             };
         }

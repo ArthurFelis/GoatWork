@@ -25,7 +25,7 @@
     padding: 22px 22px 20px;
     border: 1px solid var(--gw-border);
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--gw-surface);
     transition: box-shadow 0.15s;
 }
 
@@ -51,7 +51,7 @@
 }
 
 .prof-preco {
-    color: #b04a0e;
+    color: var(--gw-price);
     font-family: var(--font-display);
     font-size: 15px;
     font-weight: 700;
@@ -60,7 +60,7 @@
 
 .prof-sub {
     margin-top: 2px;
-    color: #8b7b70;
+    color: var(--gw-muted-2);
     font-size: 12.5px;
 }
 
@@ -85,7 +85,7 @@
 
 .prof-selo {
     margin-left: 6px;
-    color: #1d6b39;
+    color: var(--gw-green);
     font-weight: 700;
 }
 

@@ -4,6 +4,7 @@ import { carregarPainelTermos } from '../components/termos-painel.js';
 import { entrar } from '../api/auth.js';
 import { inicioDoPerfil, param, usuarioAtual } from '../utils/storage.js';
 import { emailValido } from '../utils/validacoes.js';
+import { ativarMostrarSenha } from '../components/senha.js';
 
 carregarNavbar();
 carregarFooter();
@@ -14,6 +15,7 @@ const logado = usuarioAtual();
 if (logado) location.replace(param('voltar') || inicioDoPerfil(logado.tipo));
 
 const form = document.querySelector('#form-entrar');
+ativarMostrarSenha(document.querySelector('#senha'));
 const botao = document.querySelector('#btn-entrar');
 const aceite = document.querySelector('#aceite');
 const erro = document.querySelector('#erro');

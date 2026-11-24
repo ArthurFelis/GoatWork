@@ -55,17 +55,17 @@
 
 .en-ico--rascunho {
     background: var(--gw-blue-soft);
-    color: var(--gw-navy);
+    color: var(--gw-navy-text);
 }
 
 .en-ico--aprovada {
-    background: #e1f2e6;
-    color: #1d6b39;
+    background: var(--gw-green-bg);
+    color: var(--gw-green);
 }
 
 .en-ico--pendente {
-    background: #fde6d2;
-    color: #8a3a0c;
+    background: var(--gw-peach-soft);
+    color: var(--gw-peach-fg);
 }
 
 .en-historico strong {
@@ -75,11 +75,11 @@
 }
 
 .en-historico .is-rascunho strong {
-    color: var(--gw-navy);
+    color: var(--gw-navy-text);
 }
 
 .en-historico span {
-    color: #6a564b;
+    color: var(--gw-text-soft);
     font-size: 13px;
 }
 

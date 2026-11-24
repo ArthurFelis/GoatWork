@@ -1,7 +1,7 @@
 import { carregarNavbar } from '../components/navbar.js';
 import { carregarFooter } from '../components/footer.js';
 import { toast, erro as toastErro, comCarregamento } from '../components/toast.js';
-import { assinarContrato, obterContrato } from '../api/contratos.js';
+import { assinarContrato, obterContrato, recusarContrato } from '../api/contratos.js';
 import { exigirUsuario, param } from '../utils/storage.js';
 import { esc, moeda } from '../utils/formatadores.js';
 
@@ -57,13 +57,25 @@ function render(c) {
 
     $('#assinaturas').innerHTML =
         linhaAssinatura('Trabalhador', c.aceiteTrabalhadorEm, c.meuPapel === 'TRABALHADOR') +
-        linhaAssinatura('Cliente', c.aceiteClienteEm, c.meuPapel === 'CLIENTE');
+        linhaAssinatura('Cliente', c.aceiteClienteEm, c.meuPapel === 'CLIENTE') +
+        (c.meuPapel === 'CLIENTE' && !c.aceiteClienteEm && ['GERADO', 'ACEITO_TRABALHADOR'].includes(c.status)
+            ? '<button class="ct-recusar" type="button" id="btn-recusar">Recusar orçamento e voltar ao chat</button>'
+            : '');
 
     $('#total').textContent = moeda(c.valor);
     if (c.meuPapel !== 'CLIENTE') $('#nota-total').textContent = 'O valor só é liberado ao trabalhador após a confirmação do cliente.';
     $('#acao-pagamento').innerHTML = acaoPagamento(c);
     $('#link-chat').href = `chat.html?chat=${c.idChat}`;
     $('#link-chat').hidden = c.meuPapel === 'ADMIN';
+
+    $('#btn-recusar')?.addEventListener('click', (e) => comCarregamento(e.currentTarget, async () => {
+        try {
+            await recusarContrato(c.id);
+            location.href = `chat.html?chat=${c.idChat}`;
+        } catch (err) {
+            toastErro(err);
+        }
+    }));
 
     $('#btn-assinar')?.addEventListener('click', (e) => comCarregamento(e.currentTarget, async () => {
         try {

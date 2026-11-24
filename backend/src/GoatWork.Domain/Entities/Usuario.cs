@@ -8,6 +8,7 @@ public class Usuario
     public string Nome { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string SenhaHash { get; set; } = string.Empty;
+    /// <summary>CPF (11 dígitos) ou, para cliente pessoa jurídica, CNPJ (14 dígitos).</summary>
     public string Cpf { get; set; } = string.Empty;
     public string? Telefone { get; set; }
     public TipoUsuario Tipo { get; set; }

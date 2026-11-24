@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c1e44">
+    <title>Minha carteira — GoatWork</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c1e44'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23fe893c'%3EG%3C/text%3E%3C/svg%3E">
+    <script src="../js/utils/tema-inicial.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/base/variables.css">
+    <link rel="stylesheet" href="../css/base/reset.css">
+    <link rel="stylesheet" href="../css/base/typography.css">
+    <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/footer.css">
+    <link rel="stylesheet" href="../css/components/buttons.css">
+    <link rel="stylesheet" href="../css/components/forms.css">
+    <link rel="stylesheet" href="../css/components/cards.css">
+    <link rel="stylesheet" href="../css/pages/carteira.css">
+</head>
+<body>
+    <div id="navbar"></div>
+    <main class="page">
+        <div class="container">
+            <header class="np-head">
+                <h1 class="page-title">Minha carteira</h1>
+                <p class="page-subtitle">Acompanhe o que você recebeu pelos serviços e retire para a sua conta via Pix.</p>
+            </header>
+
+            <section class="cart-resumo" aria-label="Resumo da carteira">
+                <div class="card-navy cart-saldo">
+                    <span class="small">Saldo disponível</span>
+                    <strong class="total" id="saldo">—</strong>
+                    <p class="small">Valores já liberados pelos clientes, prontos para retirar.</p>
+                </div>
+                <div class="cart-stat">
+                    <span>A receber</span>
+                    <strong id="custodia">—</strong>
+                    <small>Em custódia até o cliente aprovar a entrega</small>
+                </div>
+                <div class="cart-stat">
+                    <span>Total recebido</span>
+                    <strong id="recebido">—</strong>
+                    <small>Já descontada a taxa da plataforma</small>
+                </div>
+                <div class="cart-stat">
+                    <span>Total retirado</span>
+                    <strong id="sacado">—</strong>
+                    <small>Saques feitos via Pix</small>
+                </div>
+            </section>
+
+            <div class="layout-side layout-side--wide cart-layout">
+                <section class="card cart-historico">
+                    <div class="cart-historico-topo">
+                        <h2 class="section-title">Movimentações</h2>
+                        <div class="chips" id="filtros" role="group" aria-label="Filtrar movimentações">
+                            <button class="chip" type="button" data-filtro="" aria-pressed="true">Tudo</button>
+                            <button class="chip" type="button" data-filtro="ENTRADA" aria-pressed="false">Entradas</button>
+                            <button class="chip" type="button" data-filtro="SAQUE" aria-pressed="false">Saques</button>
+                        </div>
+                    </div>
+                    <div class="cart-scroll">
+                        <table class="table">
+                            <thead><tr><th>Data</th><th>Descrição</th><th>Situação</th><th class="cart-col-valor">Valor</th></tr></thead>
+                            <tbody id="movimentos"><tr><td colspan="4"><div class="loading"></div></td></tr></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <aside class="side-stack">
+                    <form class="card cart-retirar" id="form-saque" novalidate>
+                        <h2>Retirar valores</h2>
+                        <p class="form-error" id="erro" hidden></p>
+
+                        <div class="field">
+                            <div class="cart-label-linha">
+                                <label class="label" for="valor">Valor</label>
+                                <button class="cart-tudo" type="button" id="btn-tudo">Retirar tudo</button>
+                            </div>
+                            <input class="input" id="valor" inputmode="numeric" placeholder="R$ 0,00" autocomplete="off">
+                            <p class="hint" id="minimo">Valor mínimo por saque: —</p>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="tipo-chave">Tipo de chave Pix</label>
+                            <select class="select" id="tipo-chave">
+                                <option value="CPF">CPF</option>
+                                <option value="CNPJ">CNPJ</option>
+                                <option value="EMAIL">E-mail</option>
+                                <option value="TELEFONE">Celular</option>
+                                <option value="ALEATORIA">Chave aleatória</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <div class="cart-label-linha">
+                                <label class="label" for="chave">Chave Pix</label>
+                                <button class="cart-tudo" type="button" id="btn-meu-doc" hidden>Usar meu documento</button>
+                            </div>
+                            <input class="input" id="chave" autocomplete="off" placeholder="000.000.000-00">
+                        </div>
+
+                        <div class="cart-confirmar" id="confirmar" hidden></div>
+
+                        <button class="btn btn-orange btn-block" type="submit" id="btn-retirar" disabled>Retirar</button>
+                        <p class="hint cart-nota">A transferência cai na conta da chave Pix informada. Confira a chave antes de confirmar: o valor não pode ser devolvido pela GoatWork.</p>
+                    </form>
+                </aside>
+            </div>
+        </div>
+    </main>
+    <div id="footer"></div>
+    <script type="module" src="../js/pages/carteira.js"></script>
+</body>
+</html>

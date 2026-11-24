@@ -24,12 +24,12 @@
     line-height: 1.1;
 }
 
-.adm-stat .laranja { color: #c4500f; }
-.adm-stat .navy { color: var(--gw-navy); }
+.adm-stat .laranja { color: var(--gw-stat-orange); }
+.adm-stat .navy { color: var(--gw-navy-text); }
 .adm-stat .marrom { color: var(--gw-brown); }
 
 .adm-stat span {
-    color: #8b7b70;
+    color: var(--gw-muted-2);
     font-size: 12.5px;
 }
 
@@ -68,7 +68,7 @@
 }
 
 .adm-table tr.is-selecionada td {
-    background: #fde6d2;
+    background: var(--gw-peach-soft);
 }
 
 .adm-table td:nth-child(4) {
@@ -77,7 +77,7 @@
 
 .adm-table small {
     display: block;
-    color: #8b7b70;
+    color: var(--gw-muted-2);
     font-size: 11.5px;
 }
 
@@ -146,7 +146,7 @@
 
 .adm-painel .ct-clausula p {
     font-size: 12.5px;
-    color: #4f433d;
+    color: var(--gw-text-body);
 }
 
 .adm-painel .ct-clausula + .ct-clausula {

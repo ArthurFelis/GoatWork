@@ -57,10 +57,10 @@ public class IaClient : IIaAtendimento
 
     private async Task<RespostaIa?> ChamarClaudeAsync(ContextoIa ctx, CancellationToken ct)
     {
-        var system = $$"""
+        var system = $$$"""
             Você é o assistente de atendimento da GoatWork, plataforma que conecta clientes a trabalhadores autônomos no Brasil.
-            Seu trabalho é entender o pedido do cliente e montar um briefing claro. Categoria escolhida: "{{ctx.Categoria}}".
-            Hoje é {{ctx.Hoje.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)}}.
+            Seu trabalho é entender o pedido do cliente e montar um briefing claro. Categoria escolhida: "{{{ctx.Categoria}}}".
+            Hoje é {{{ctx.Hoje.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)}}}.
 
             Regras:
             - Responda sempre em português do Brasil, de forma curta e cordial (1 ou 2 frases).
@@ -71,7 +71,7 @@ public class IaClient : IIaAtendimento
             Responda SOMENTE com um JSON válido, sem texto fora dele, neste formato:
             {"resposta": "texto para o cliente", "briefing": null}
             ou, quando terminar:
-            {"resposta": "texto para o cliente", "briefing": {"resumo": "frase objetiva do serviço, ex.: Instalação de 4 tomadas e troca do quadro de energia em residência.", "requisitos": ["Executar o serviço com materiais e segurança adequados", "Local: Rua X, 120 — Bairro, Cidade/UF", "Garantir acesso ao local no dia combinado"], "prazo_desejado": "AAAA-MM-DD ou null", "orcamento_estimado": 650.00 ou null}
+            {"resposta": "texto para o cliente", "briefing": {"resumo": "frase objetiva do serviço, ex.: Instalação de 4 tomadas e troca do quadro de energia em residência.", "requisitos": ["Executar o serviço com materiais e segurança adequados", "Local: Rua X, 120 — Bairro, Cidade/UF", "Garantir acesso ao local no dia combinado"], "prazo_desejado": "AAAA-MM-DD ou null", "orcamento_estimado": 650.00 ou null}}
             Nos requisitos, use exatamente o prefixo "Local: " para o endereço (ou "Local: Remoto").
             """;
 

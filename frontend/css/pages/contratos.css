@@ -12,7 +12,7 @@
     padding: 22px 21px 20px;
     border: 1px solid var(--gw-border);
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--gw-surface);
 }
 
 .pedido-topo {
@@ -31,7 +31,7 @@
 
 .pedido-meta {
     margin: 12px 0 10px;
-    color: #7d6a5d;
+    color: var(--gw-text-warm);
     font-size: 13.5px;
 }
 

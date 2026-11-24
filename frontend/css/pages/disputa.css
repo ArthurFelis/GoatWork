@@ -47,7 +47,7 @@
 }
 
 .ds-etapas span {
-    color: #6a564b;
+    color: var(--gw-text-soft);
     font-size: 13px;
 }
 

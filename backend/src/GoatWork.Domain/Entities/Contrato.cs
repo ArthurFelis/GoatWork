@@ -10,6 +10,10 @@ public class Contrato
     public string TextoContrato { get; set; } = string.Empty;
     public decimal ValorAcordado { get; set; }
     public DateOnly PrazoEntrega { get; set; }
+    /// <summary>Horário combinado (ex.: "9h"), informado no orçamento do trabalhador.</summary>
+    public string? HoraServico { get; set; }
+    /// <summary>Local combinado (endereço ou "Remoto").</summary>
+    public string? LocalServico { get; set; }
     public decimal TaxaPlataformaPerc { get; set; }
     public StatusContrato Status { get; set; } = StatusContrato.GERADO;
     public DateTime DataGeracao { get; set; } = DateTime.Now;

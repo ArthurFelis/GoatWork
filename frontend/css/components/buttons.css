@@ -32,18 +32,18 @@
 /* Bege: "Salvar rascunho", "Cancelar", "Ver Profissionais" */
 .btn-secondary {
     background: var(--gw-sand);
-    color: #5a463b;
+    color: var(--gw-text-strong);
 }
 
 .btn-secondary:hover:not(:disabled) {
-    background: #e5d8c9;
+    background: var(--gw-sand-hover);
 }
 
 /* Contorno: "Rejeitar entrega", "Recusar", "Analisar" */
 .btn-outline {
-    background: #ffffff;
-    border-color: #ddd3c8;
-    color: #5a463b;
+    background: var(--gw-surface);
+    border-color: var(--gw-border-btn);
+    color: var(--gw-text-strong);
 }
 
 .btn-outline:hover:not(:disabled) {
@@ -54,7 +54,7 @@
 /* Laranja sólido: "Pagar R$ ..." */
 .btn-orange {
     background: var(--gw-orange);
-    color: var(--gw-navy);
+    color: #0c1e44;
 }
 
 .btn-orange:hover:not(:disabled) {
@@ -70,8 +70,8 @@
 
 .btn-outline:disabled,
 .btn-secondary:disabled {
-    background: #f1ece6;
-    color: #aaa;
+    background: var(--gw-disabled-soft);
+    color: var(--gw-disabled-fg);
 }
 
 .btn-block {

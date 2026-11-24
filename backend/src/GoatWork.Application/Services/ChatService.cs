@@ -41,8 +41,9 @@ public class ChatService
             .Select(c =>
             {
                 var ultima = c.Mensagens.Count == 0 ? c.DataAbertura : c.Mensagens.Max(m => m.DataHora);
-                var etapa = c.Contrato is not null ? $"Contrato {c.Contrato.Numero}"
-                    : c.Status == StatusChat.ABERTO ? "Negociando" : "Encerrado";
+                var etapa = c.Contrato is { AceiteClienteEm: not null } ? $"Contrato {c.Contrato.Numero}"
+                    : c.Contrato is not null ? "Orçamento enviado"
+                    : c.Status == StatusChat.ABERTO ? "Em negociação" : "Encerrado";
                 return new ConversaResumoDto(c.IdChat, OutraParte(c, usuario), $"{etapa} · Pedido {Texto.NumeroPedido(c.Convite.IdPedido)}", ultima);
             })
             .OrderByDescending(c => c.UltimaAtividade)
@@ -98,7 +99,7 @@ public class ChatService
             : $"{c.Convite.Trabalhador.Profissao ?? "Profissional"} · Pedido {numeroPedido}";
 
         var visiveis = c.Mensagens
-            .OrderBy(m => m.DataHora).ThenBy(m => m.IdMensagem)
+            .OrderBy(m => m.IdMensagem)
             // mensagens bloqueadas só aparecem (mascaradas) para quem enviou
             .Where(m => !m.Bloqueada || m.IdRemetente == u.Id)
             .Select(m =>
@@ -109,12 +110,28 @@ public class ChatService
             })
             .ToList();
 
-        AcordoDto? acordo = null;
-        if (c.Contrato is null && c.Status == StatusChat.ABERTO)
+        var pedido = c.Convite.Pedido;
+        var briefing = pedido.Briefing;
+        var fixado = new FixadoChatDto(
+            briefing?.Resumo ?? Texto.TituloPedido(pedido.DescricaoInicial),
+            Texto.Local(briefing?.Requisitos),
+            briefing?.PrazoDesejado,
+            briefing?.OrcamentoEstimado);
+
+        PropostaChatDto? proposta = c.Contrato is { } ct
+            ? new PropostaChatDto(ct.IdContrato, ct.Numero, ct.ValorAcordado, ct.PrazoEntrega, ct.HoraServico, ct.LocalServico,
+                ct.Status.ToString(), ct.AceiteClienteEm is not null, ct.AceiteTrabalhadorEm is not null)
+            : null;
+
+        // Pré-preenche o formulário "Enviar orçamento" com o que já foi conversado
+        SugestaoOrcamentoDto? sugestao = null;
+        if (u.EhTrabalhador && c.Status == StatusChat.ABERTO && proposta is not { AssinadoCliente: true })
         {
-            var textos = c.Mensagens.Where(m => !m.Bloqueada).OrderBy(m => m.DataHora).ThenBy(m => m.IdMensagem).Select(m => m.Conteudo).ToList();
-            var a = DetectorAcordo.Detectar(textos, DateOnly.FromDateTime(DateTime.Today), c.Convite.Pedido.Briefing?.PrazoDesejado);
-            if (a is not null) acordo = new AcordoDto(a.Valor, a.Data, a.Hora);
+            var textos = c.Mensagens.Where(m => !m.Bloqueada).OrderBy(m => m.IdMensagem).Select(m => m.Conteudo).ToList();
+            var sug = DetectorAcordo.Sugerir(textos, DateOnly.FromDateTime(DateTime.Today), briefing?.PrazoDesejado, briefing?.OrcamentoEstimado);
+            sugestao = proposta is not null
+                ? new SugestaoOrcamentoDto(proposta.Valor, proposta.Data, proposta.Hora, proposta.Local)
+                : new SugestaoOrcamentoDto(sug.Valor, sug.Data, sug.Hora, fixado.Local);
         }
 
         return new ChatDto(
@@ -124,10 +141,11 @@ public class ChatService
             OutraParte(c, u),
             subtitulo,
             c.Status.ToString(),
+            u.EhAdmin ? "ADMIN" : u.EhTrabalhador ? "TRABALHADOR" : "CLIENTE",
             visiveis,
-            acordo,
-            c.Contrato?.IdContrato,
-            c.Contrato?.Numero,
-            c.Contrato?.Status.ToString());
+            fixado,
+            proposta,
+            sugestao,
+            pedido.Status != StatusPedido.PUBLICADO && c.Contrato is null);
     }
 }

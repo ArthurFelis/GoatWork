@@ -1,9 +1,12 @@
+using GoatWork.Domain.Enums;
+
 namespace GoatWork.Domain.Entities;
 
 public class Trabalhador
 {
     public int IdUsuario { get; set; }
     public string? Biografia { get; set; }
+    public TipoPessoa TipoPessoa { get; set; } = TipoPessoa.FISICA;
     public bool Verificado { get; set; }
     public decimal NotaMedia { get; set; }
     public DateTime? DataVerificacao { get; set; }

@@ -31,6 +31,7 @@ public class AppDbContext : DbContext, IAppDbContext
     public DbSet<Entrega> Entregas => Set<Entrega>();
     public DbSet<Disputa> Disputas => Set<Disputa>();
     public DbSet<Avaliacao> Avaliacoes => Set<Avaliacao>();
+    public DbSet<Saque> Saques => Set<Saque>();
 
     protected override void OnModelCreating(ModelBuilder mb)
     {
@@ -49,7 +50,7 @@ public class AppDbContext : DbContext, IAppDbContext
             e.HasKey(x => x.IdUsuario);
             e.Property(x => x.Nome).HasMaxLength(150);
             e.Property(x => x.Email).HasMaxLength(190);
-            e.Property(x => x.Cpf).HasMaxLength(11).IsFixedLength();
+            e.Property(x => x.Cpf).HasMaxLength(14); // CPF ou CNPJ
             e.Property(x => x.Telefone).HasMaxLength(20);
             e.Property(x => x.Tipo).HasConversion<string>();
             e.Property(x => x.Status).HasConversion<string>();
@@ -73,6 +74,7 @@ public class AppDbContext : DbContext, IAppDbContext
             e.HasKey(x => x.IdUsuario);
             e.Property(x => x.IdUsuario).ValueGeneratedNever();
             e.Property(x => x.NotaMedia).HasPrecision(3, 2);
+            e.Property(x => x.TipoPessoa).HasConversion<string>();
             e.Property(x => x.Profissao).HasMaxLength(80);
             e.Property(x => x.Cidade).HasMaxLength(100);
             e.Property(x => x.ValorReferencia).HasPrecision(12, 2);
@@ -170,6 +172,8 @@ public class AppDbContext : DbContext, IAppDbContext
             e.Ignore(x => x.Numero);
             e.Property(x => x.ValorAcordado).HasPrecision(12, 2);
             e.Property(x => x.TaxaPlataformaPerc).HasPrecision(5, 2);
+            e.Property(x => x.HoraServico).HasMaxLength(10);
+            e.Property(x => x.LocalServico).HasMaxLength(255);
             e.Property(x => x.Status).HasConversion<string>();
             e.HasIndex(x => x.IdChat).IsUnique();
             e.HasOne(x => x.Chat).WithOne(c => c.Contrato).HasForeignKey<Contrato>(x => x.IdChat);
@@ -216,6 +220,18 @@ public class AppDbContext : DbContext, IAppDbContext
             e.HasOne(x => x.Contrato).WithMany(c => c.Avaliacoes).HasForeignKey(x => x.IdContrato);
             e.HasOne(x => x.Avaliador).WithMany().HasForeignKey(x => x.IdAvaliador);
             e.HasOne(x => x.Avaliado).WithMany().HasForeignKey(x => x.IdAvaliado);
+        });
+
+        mb.Entity<Saque>(e =>
+        {
+            e.ToTable("saque");
+            e.HasKey(x => x.IdSaque);
+            e.Property(x => x.Valor).HasPrecision(12, 2);
+            e.Property(x => x.TipoChave).HasConversion<string>();
+            e.Property(x => x.ChavePix).HasMaxLength(140);
+            e.Property(x => x.Status).HasConversion<string>();
+            e.Property(x => x.IdTransacaoGateway).HasMaxLength(100);
+            e.HasOne(x => x.Trabalhador).WithMany().HasForeignKey(x => x.IdTrabalhador);
         });
 
         // Nomes de colunas em snake_case (IdUsuario → id_usuario) e sem exclusão em cascata pelo EF

@@ -11,7 +11,7 @@
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
     gap: 24px;
-    background: var(--gw-navy);
+    background: var(--gw-nav-bg);
     color: #ffffff;
 }
 
@@ -106,7 +106,7 @@
     min-width: 190px;
     padding: 6px;
     border-radius: 10px;
-    background: #ffffff;
+    background: var(--gw-surface);
     box-shadow: 0 16px 40px rgba(12, 30, 68, 0.18);
     color: var(--gw-ink);
 }
@@ -162,7 +162,7 @@
         align-items: stretch;
         gap: 0;
         padding: 6px 16px 14px;
-        background: var(--gw-navy);
+        background: var(--gw-nav-bg);
         border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
@@ -187,4 +187,30 @@
     .gw-user-name {
         display: none;
     }
+}
+
+/* Botão modo escuro / claro */
+.gw-tema {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 50%;
+    background: transparent;
+    color: #ffffff;
+    transition: color 0.15s, border-color 0.15s, background-color 0.15s;
+}
+
+.gw-tema:hover {
+    border-color: var(--gw-orange);
+    color: var(--gw-orange);
+}
+
+.gw-tema[aria-pressed="true"] {
+    color: var(--gw-orange);
+}
+
+.gw-nav-actions {
+    gap: 14px;
 }

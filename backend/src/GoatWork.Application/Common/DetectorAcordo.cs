@@ -10,7 +10,7 @@ namespace GoatWork.Application.Common;
 public static class DetectorAcordo
 {
     private static readonly Regex Valor =
-        new(@"R\$\s*(\d{1,3}(?:\.\d{3})*|\d+)(?:,(\d{2}))?", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        new(@"R\$\s*(\d{1,3}(?:\.\d{3})+|\d+)(?:,(\d{1,2}))?(?!\d)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
     private static readonly Regex Data =
         new(@"\b(\d{1,2})/(\d{1,2})(?:/(\d{2,4}))?\b", RegexOptions.Compiled);
@@ -23,6 +23,8 @@ public static class DetectorAcordo
         new(@"\b(combinado|fechado|fechamos|fechou|de acordo|aceito|topo|pode ser|está ótimo|esta otimo|ok, pode)\b", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
     public record Acordo(decimal Valor, DateOnly Data, string? Hora);
+
+    public record Sugestao(decimal? Valor, DateOnly? Data, string? Hora);
 
     /// <summary>
     /// Percorre as mensagens da mais nova para a mais antiga e usa o último valor e a última data citados.
@@ -50,12 +52,30 @@ public static class DetectorAcordo
         return valor is > 0 && data is not null ? new Acordo(valor.Value, data.Value, hora) : null;
     }
 
+    /// <summary>
+    /// Sugestão para pré-preencher o formulário "Enviar orçamento": último valor, data e hora citados
+    /// no chat (sem exigir confirmação), com o prazo do briefing como reserva para a data.
+    /// </summary>
+    public static Sugestao Sugerir(IEnumerable<string> mensagensEmOrdem, DateOnly hoje, DateOnly? prazoBriefing, decimal? orcamentoBriefing)
+    {
+        decimal? valor = null;
+        DateOnly? data = null;
+        string? hora = null;
+        foreach (var msg in Enumerable.Reverse(mensagensEmOrdem.ToList()))
+        {
+            valor ??= ExtrairValor(msg);
+            data ??= ExtrairData(msg, hoje, prazoBriefing);
+            hora ??= ExtrairHora(msg);
+        }
+        return new Sugestao(valor ?? orcamentoBriefing, data ?? prazoBriefing, hora);
+    }
+
     public static decimal? ExtrairValor(string texto)
     {
         var m = Valor.Matches(texto).LastOrDefault();
         if (m is null) return null;
         var inteiro = m.Groups[1].Value.Replace(".", "");
-        var centavos = m.Groups[2].Success ? m.Groups[2].Value : "00";
+        var centavos = m.Groups[2].Success ? m.Groups[2].Value.PadRight(2, '0') : "00";
         return decimal.TryParse($"{inteiro}.{centavos}", NumberStyles.Number, CultureInfo.InvariantCulture, out var v) ? v : null;
     }
 

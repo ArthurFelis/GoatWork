@@ -19,10 +19,19 @@ public class ContratosController : BaseApiController
     [HttpGet("{id:int}")]
     public async Task<ActionResult<ContratoDto>> Obter(int id) => Ok(await _contratos.ObterAsync(Usuario, id));
 
-    /// <summary>"Gerar contrato" a partir do acordo identificado no chat.</summary>
-    [Authorize(Roles = "CLIENTE,TRABALHADOR")]
+    /// <summary>"Enviar orçamento" no chat: o trabalhador gera o contrato já assinado por ele.</summary>
+    [Authorize(Roles = "TRABALHADOR")]
     [HttpPost]
     public async Task<ActionResult<ContratoDto>> Gerar(GerarContratoRequest req) => Ok(await _contratos.GerarAsync(Usuario, req));
+
+    /// <summary>"Recusar orçamento": o cliente descarta o contrato ainda não assinado por ele.</summary>
+    [Authorize(Roles = "CLIENTE")]
+    [HttpPost("{id:int}/recusar")]
+    public async Task<IActionResult> Recusar(int id)
+    {
+        await _contratos.RecusarAsync(Usuario, id);
+        return NoContent();
+    }
 
     [Authorize(Roles = "CLIENTE,TRABALHADOR")]
     [HttpPost("{id:int}/assinar")]

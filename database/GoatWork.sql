@@ -26,7 +26,7 @@ CREATE TABLE usuario (
   nome          VARCHAR(150) NOT NULL,
   email         VARCHAR(190) NOT NULL,
   senha_hash    VARCHAR(255) NOT NULL,
-  cpf           CHAR(11)     NOT NULL,
+  cpf           VARCHAR(14)  NOT NULL,      -- CPF (11 dígitos) ou CNPJ (14) para cliente pessoa jurídica
   telefone      VARCHAR(20)  NULL,
   tipo          ENUM('CLIENTE','TRABALHADOR','ADMIN') NOT NULL,
   status        ENUM('ATIVO','INATIVO','SUSPENSO','BLOQUEADO') NOT NULL DEFAULT 'ATIVO',
@@ -53,6 +53,7 @@ CREATE TABLE aceite_termos (
 CREATE TABLE trabalhador (
   id_usuario        INT UNSIGNED NOT NULL,
   biografia         TEXT         NULL,
+  tipo_pessoa       ENUM('FISICA','JURIDICA') NOT NULL DEFAULT 'FISICA',  -- JURIDICA = cadastro com CNPJ
   verificado        BOOLEAN      NOT NULL DEFAULT FALSE,
   nota_media        DECIMAL(3,2) NOT NULL DEFAULT 0.00,
   data_verificacao  DATETIME     NULL,
@@ -208,6 +209,8 @@ CREATE TABLE contrato (
   texto_contrato       LONGTEXT      NOT NULL,
   valor_acordado       DECIMAL(12,2) NOT NULL,
   prazo_entrega        DATE          NOT NULL,
+  hora_servico         VARCHAR(10)   NULL,          -- horário combinado no orçamento (ex.: 9h)
+  local_servico        VARCHAR(255)  NULL,          -- endereço combinado ou "Remoto"
   taxa_plataforma_perc DECIMAL(5,2)  NOT NULL,
   status               ENUM('GERADO','ACEITO_CLIENTE','ACEITO_TRABALHADOR','ATIVO',
                             'CONCLUIDO','CANCELADO','EM_DISPUTA')
@@ -301,6 +304,26 @@ CREATE TABLE avaliacao (
     ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT fk_avaliacao_avaliado FOREIGN KEY (id_avaliado) REFERENCES usuario (id_usuario)
     ON UPDATE CASCADE ON DELETE RESTRICT
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
+-- Carteira do trabalhador: saques via Pix do saldo liberado
+-- ---------------------------------------------------------------------
+CREATE TABLE saque (
+  id_saque              INT UNSIGNED  NOT NULL AUTO_INCREMENT,
+  id_trabalhador        INT UNSIGNED  NOT NULL,
+  valor                 DECIMAL(12,2) NOT NULL,
+  tipo_chave            ENUM('CPF','CNPJ','EMAIL','TELEFONE','ALEATORIA') NOT NULL,
+  chave_pix             VARCHAR(140)  NOT NULL,
+  status                ENUM('SOLICITADO','PAGO','FALHOU') NOT NULL DEFAULT 'SOLICITADO',
+  id_transacao_gateway  VARCHAR(100)  NULL,
+  data_solicitacao      DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  data_conclusao        DATETIME      NULL,
+  PRIMARY KEY (id_saque),
+  KEY ix_saque_trabalhador (id_trabalhador),
+  CONSTRAINT fk_saque_trabalhador FOREIGN KEY (id_trabalhador) REFERENCES trabalhador (id_usuario)
+    ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT ck_saque_valor CHECK (valor > 0)
 ) ENGINE=InnoDB;
 
 DELIMITER $$

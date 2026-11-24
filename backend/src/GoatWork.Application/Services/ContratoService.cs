@@ -51,7 +51,11 @@ public class ContratoService
     public static string? Papel(Contrato c, int idUsuario) =>
         IdCliente(c) == idUsuario ? "CLIENTE" : IdTrabalhador(c) == idUsuario ? "TRABALHADOR" : null;
 
-    /// <summary>Card "Acordo identificado" → "Gerar contrato".</summary>
+    /// <summary>
+    /// Botão "Enviar orçamento" no chat (trabalhador): gera o contrato com o valor, a data, o horário
+    /// e o local informados, JÁ ASSINADO pelo trabalhador. Enquanto o cliente não assinar,
+    /// o trabalhador pode enviar um novo orçamento, que substitui o anterior.
+    /// </summary>
     public async Task<ContratoDto> GerarAsync(UsuarioLogado u, GerarContratoRequest req)
     {
         var chat = await _db.Chats
@@ -59,42 +63,74 @@ public class ContratoService
                        .Include(c => c.Mensagens)
                        .Include(c => c.Convite).ThenInclude(cv => cv.Trabalhador)
                        .Include(c => c.Convite).ThenInclude(cv => cv.Pedido).ThenInclude(p => p.Briefing)
-                       .Include(c => c.Convite).ThenInclude(cv => cv.Pedido).ThenInclude(p => p.Convites).ThenInclude(o => o.Chat)
                        .FirstOrDefaultAsync(c => c.IdChat == req.IdChat)
                    ?? throw new NaoEncontradoException("Conversa não encontrada.");
 
-        var participa = chat.Convite.IdTrabalhador == u.Id || chat.Convite.Pedido.IdCliente == u.Id;
-        if (!participa) throw new AcessoNegadoException();
-        Validacao.Exigir(chat.Contrato is null, "Esta conversa já tem um contrato.");
+        if (chat.Convite.IdTrabalhador != u.Id)
+            throw new AcessoNegadoException("Só o profissional envia o orçamento.");
         Validacao.Exigir(chat.Status == StatusChat.ABERTO, "Esta conversa está encerrada.");
-        Validacao.Exigir(req.Valor > 0, "Informe o valor acordado.");
-        Validacao.Exigir(req.Prazo >= DateOnly.FromDateTime(DateTime.Today), "A data de entrega não pode estar no passado.");
+        Validacao.Exigir(req.Valor > 0, "Informe o valor do orçamento.");
+        Validacao.Exigir(req.Valor <= 9_999_999m, "Valor muito alto.");
+        Validacao.Exigir(req.Prazo >= DateOnly.FromDateTime(DateTime.Today), "A data do serviço não pode estar no passado.");
 
         var pedido = chat.Convite.Pedido;
-        Validacao.Exigir(pedido.Status == StatusPedido.PUBLICADO, "Este pedido já tem um contrato em andamento.");
+        Validacao.Exigir(pedido.Status == StatusPedido.PUBLICADO, "Este pedido já foi fechado.");
 
-        var textos = chat.Mensagens.Where(m => !m.Bloqueada).OrderBy(m => m.DataHora).Select(m => m.Conteudo);
-        var hora = textos.Reverse().Select(DetectorAcordo.ExtrairHora).FirstOrDefault(h => h is not null);
+        var hora = NormalizarHora(req.Hora);
+        var local = string.IsNullOrWhiteSpace(req.Local) ? Texto.Local(pedido.Briefing?.Requisitos) : req.Local.Trim();
+        if (local?.Length > 255) local = local[..255];
+        var valor = Math.Round(req.Valor, 2);
+        var agora = DateTime.Now;
 
-        var contrato = new Contrato
+        var contrato = chat.Contrato;
+        if (contrato is null)
         {
-            Chat = chat,
-            ValorAcordado = Math.Round(req.Valor, 2),
-            PrazoEntrega = req.Prazo,
-            TaxaPlataformaPerc = _plataforma.TaxaPercentualPadrao,
-            Status = StatusContrato.GERADO,
-            DataGeracao = DateTime.Now,
-            TextoContrato = MontarTexto(pedido.Briefing, pedido.DescricaoInicial, req.Valor, req.Prazo, hora)
-        };
-        _db.Contratos.Add(contrato);
+            contrato = new Contrato { Chat = chat, DataGeracao = agora, TaxaPlataformaPerc = _plataforma.TaxaPercentualPadrao };
+            _db.Contratos.Add(contrato);
+        }
+        else
+        {
+            Validacao.Exigir(contrato.AceiteClienteEm is null, "O cliente já assinou este contrato.");
+        }
 
-        pedido.Status = StatusPedido.EM_ANDAMENTO;
-        // As outras conversas do mesmo pedido são encerradas
-        foreach (var outro in pedido.Convites.Where(c => c.Chat is not null && c.Chat.IdChat != chat.IdChat))
-            outro.Chat!.Status = StatusChat.FECHADO;
+        contrato.ValorAcordado = valor;
+        contrato.PrazoEntrega = req.Prazo;
+        contrato.HoraServico = hora;
+        contrato.LocalServico = local;
+        contrato.TextoContrato = MontarTexto(pedido.Briefing, pedido.DescricaoInicial, valor, req.Prazo, hora, local);
+        // O orçamento enviado já vale como assinatura do trabalhador
+        contrato.AceiteTrabalhadorEm = agora;
+        contrato.Status = StatusContrato.ACEITO_TRABALHADOR;
+
+        // Fica registrado no chat (histórico para mediação)
+        chat.Mensagens.Add(new Mensagem
+        {
+            IdRemetente = u.Id,
+            Conteudo = $"Enviei o orçamento: {Texto.Moeda(valor)} para {DataComHora(req.Prazo, hora)}" +
+                       (local is null ? "." : $" · {local}."),
+            DataHora = agora
+        });
 
         await _db.SaveChangesAsync();
         return await ObterAsync(u, contrato.IdContrato);
+    }
+
+    /// <summary>"Recusar orçamento" (cliente): descarta o contrato não assinado; a negociação continua.</summary>
+    public async Task RecusarAsync(UsuarioLogado u, int idContrato)
+    {
+        var c = await CarregarAsync(u, idContrato);
+        if (Papel(c, u.Id) != "CLIENTE") throw new AcessoNegadoException("Só o cliente pode recusar o orçamento.");
+        Validacao.Exigir(c.AceiteClienteEm is null && c.Status is StatusContrato.GERADO or StatusContrato.ACEITO_TRABALHADOR,
+            "Este contrato já foi assinado e não pode ser recusado.");
+
+        c.Chat.Mensagens.Add(new Mensagem
+        {
+            IdRemetente = u.Id,
+            Conteudo = $"Recusei o orçamento de {Texto.Moeda(c.ValorAcordado)}. Podemos ajustar?",
+            DataHora = DateTime.Now
+        });
+        _db.Contratos.Remove(c);
+        await _db.SaveChangesAsync();
     }
 
     public async Task<ContratoDto> ObterAsync(UsuarioLogado u, int idContrato) =>
@@ -107,6 +143,8 @@ public class ContratoService
         var papel = Papel(c, u.Id) ?? throw new AcessoNegadoException("Só as partes do contrato podem assinar.");
         Validacao.Exigir(c.Status is StatusContrato.GERADO or StatusContrato.ACEITO_CLIENTE or StatusContrato.ACEITO_TRABALHADOR,
             "Este contrato não está aguardando assinatura.");
+        var pedido = c.Chat.Convite.Pedido;
+        Validacao.Exigir(pedido.Status == StatusPedido.PUBLICADO, "Este pedido já foi fechado com outro contrato.");
 
         var agora = DateTime.Now;
         if (papel == "CLIENTE")
@@ -127,9 +165,40 @@ public class ContratoService
             (null, not null) => StatusContrato.ACEITO_TRABALHADOR,
             _ => StatusContrato.GERADO
         };
+
+        if (c.Status == StatusContrato.ATIVO)
+        {
+            // Pedido fechado: encerra as outras negociações e descarta orçamentos não assinados
+            pedido.Status = StatusPedido.EM_ANDAMENTO;
+            var outrosChats = await _db.Chats
+                .Include(ch => ch.Contrato)
+                .Where(ch => ch.Convite.IdPedido == pedido.IdPedido && ch.IdChat != c.IdChat)
+                .ToListAsync();
+            foreach (var outro in outrosChats)
+            {
+                outro.Status = StatusChat.FECHADO;
+                if (outro.Contrato is { AceiteClienteEm: null } descartado) _db.Contratos.Remove(descartado);
+            }
+        }
+
         await _db.SaveChangesAsync();
         return ParaDto(c, u);
     }
+
+    /// <summary>"9", "9h", "09:00", "14h30" → "9h", "9h", "9h", "14h30".</summary>
+    public static string? NormalizarHora(string? hora)
+    {
+        if (string.IsNullOrWhiteSpace(hora)) return null;
+        var m = System.Text.RegularExpressions.Regex.Match(hora.Trim(), @"^(\d{1,2})\s*(?:[:hH]\s*(\d{2})?)?\s*h?$");
+        if (!m.Success) throw new RegraNegocioException("Horário inválido. Use, por exemplo, 9h ou 14:30.");
+        var h = int.Parse(m.Groups[1].Value);
+        var min = m.Groups[2].Success ? int.Parse(m.Groups[2].Value) : 0;
+        if (h > 23 || min > 59) throw new RegraNegocioException("Horário inválido. Use, por exemplo, 9h ou 14:30.");
+        return min == 0 ? $"{h}h" : $"{h}h{min:D2}";
+    }
+
+    public static string DataComHora(DateOnly data, string? hora) =>
+        data.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) + (hora is null ? "" : $" às {hora}");
 
     /// <summary>Tabela "Contratos" da tela "Pedidos e contratos".</summary>
     public async Task<List<ContratoListaDto>> ListarAsync(UsuarioLogado u)
@@ -163,10 +232,9 @@ public class ContratoService
             })
             .ToList();
 
-    private static string MontarTexto(Briefing? briefing, string descricao, decimal valor, DateOnly prazo, string? hora)
+    private static string MontarTexto(Briefing? briefing, string descricao, decimal valor, DateOnly prazo, string? hora, string? local)
     {
         var objeto = briefing?.Resumo ?? Texto.TituloPedido(descricao);
-        var local = Texto.Local(briefing?.Requisitos);
         var remoto = local is null || local.Contains("remot", StringComparison.OrdinalIgnoreCase);
         var dia = Texto.Capitalizar(prazo.ToString("dddd", Texto.PtBr).Replace("-feira", ""));
         var data = $"{dia}, {prazo.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)}{(hora is null ? "" : $", às {hora}")}";
@@ -199,6 +267,8 @@ public class ContratoService
         Clausulas(c.TextoContrato),
         c.ValorAcordado,
         c.PrazoEntrega,
+        c.HoraServico,
+        c.LocalServico,
         c.TaxaPlataformaPerc,
         c.AceiteClienteEm,
         c.AceiteTrabalhadorEm,

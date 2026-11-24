@@ -92,3 +92,38 @@ public class ValidacaoTests
         Assert.Equal(585m, liquido);
     }
 }
+
+public class CorrecoesTests
+{
+    [Theory]
+    [InlineData("Fica R$ 1500,00 com material", 1500)]
+    [InlineData("Fica R$ 1.500,00", 1500)]
+    [InlineData("Combinado: R$ 300,00, dia 20/11", 300)]
+    [InlineData("R$300", 300)]
+    [InlineData("R$ 650,5", 650.5)]
+    public void Le_o_valor_combinado(string texto, double esperado) =>
+        Assert.Equal((decimal)esperado, DetectorAcordo.ExtrairValor(texto));
+
+    [Theory]
+    [InlineData("Goat@1234", true)]
+    [InlineData("goat@1234", false)]
+    [InlineData("Goat1234", false)]
+    [InlineData("Go@1", false)]
+    public void Regras_de_senha(string senha, bool valida) => Assert.Equal(valida, Validacao.ProblemaSenha(senha) is null);
+
+    [Theory]
+    [InlineData("9", "9h")]
+    [InlineData("09:00", "9h")]
+    [InlineData("14h30", "14h30")]
+    public void Normaliza_horario(string entrada, string esperado) => Assert.Equal(esperado, ContratoService.NormalizarHora(entrada));
+}
+
+public class CarteiraTests
+{
+    [Theory]
+    [InlineData(GoatWork.Domain.Enums.TipoChavePix.CPF, "52998224725", "***.982.247-**")]
+    [InlineData(GoatWork.Domain.Enums.TipoChavePix.EMAIL, "carlos@gmail.com", "ca***@gmail.com")]
+    [InlineData(GoatWork.Domain.Enums.TipoChavePix.TELEFONE, "+5511987654321", "(**) *****-4321")]
+    public void Mascara_a_chave_pix_no_historico(GoatWork.Domain.Enums.TipoChavePix tipo, string chave, string esperado) =>
+        Assert.Equal(esperado, CarteiraService.MascararChave(tipo, chave));
+}

@@ -56,9 +56,13 @@ function cardPedido(p) {
         badge = '<span class="badge badge--peach">Em briefing</span>';
         meta += `criado ${quando(p.dataCriacao)}`;
         acao = seta('Continuar com a IA', `chat-ia.html?pedido=${p.id}`);
+    } else if (p.idChat && p.idContrato) {
+        badge = '<span class="badge badge--peach">Orçamento recebido</span>';
+        meta += `${esc(p.trabalhadorAceito)} enviou o orçamento`;
+        acao = seta('Ver e assinar', `contrato.html?id=${p.idContrato}`);
     } else if (p.idChat) {
-        badge = '<span class="badge badge--blue">Convite aceito</span>';
-        meta += `${esc(p.trabalhadorAceito)} aceitou`;
+        badge = '<span class="badge badge--blue">Em negociação</span>';
+        meta += `negociando com ${esc(p.trabalhadorAceito)}`;
         acao = seta('Abrir chat', `chat.html?chat=${p.idChat}`);
     } else {
         badge = '<span class="badge badge--peach">Aguardando aceite</span>';

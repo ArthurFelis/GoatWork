@@ -53,7 +53,7 @@
 }
 
 .pf-stats .servicos {
-    color: var(--gw-navy);
+    color: var(--gw-navy-text);
 }
 
 .pf-stats span {
@@ -104,7 +104,7 @@
 .pf-atuacao label {
     display: block;
     margin-bottom: 6px;
-    color: #8b7b70;
+    color: var(--gw-muted-2);
     font-size: 12px;
 }
 
@@ -113,9 +113,9 @@
     place-items: center;
     width: 46px;
     height: 46px;
-    border: 1px solid #e3d8cc;
+    border: 1px solid var(--gw-border-soft);
     border-radius: 8px;
-    background: #ffffff;
+    background: var(--gw-surface);
     color: var(--gw-brown);
     font-size: 18px;
 }
@@ -130,7 +130,7 @@
     padding: 0 18px;
     border: 1px dashed var(--gw-brown);
     border-radius: 8px;
-    background: #ffffff;
+    background: var(--gw-surface);
     color: var(--gw-brown);
     font-size: 14px;
     font-weight: 700;

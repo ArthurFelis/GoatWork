@@ -317,10 +317,19 @@ GoatWork/
 **Pré-requisitos:** .NET 8 SDK e MySQL 8.
 
 1. Crie o banco: rode `database/GoatWork.sql` e depois `database/scripts/02-seed.sql`.
+   (Já tinha o banco de uma versão anterior? Rode os scripts de migração que ainda não rodou, em ordem: `04-migracao-orcamento.sql`, `05-migracao-cnpj.sql`, `06-migracao-carteira.sql`.)
    (Banco criado com a versão antiga do script? Rode `database/scripts/03-migracao-colunas-telas.sql`.)
 2. Ajuste `backend/src/GoatWork.Api/appsettings.json`: senha do MySQL em `ConnectionStrings:GoatWork` e uma `Jwt:Key` com 32+ caracteres.
 3. Na pasta `backend/`: `dotnet run --project src/GoatWork.Api`
 4. Abra **http://localhost:5080** — a API também serve o front-end (Swagger em `/swagger`).
+
+**Como o contrato é gerado:** no chat, o profissional clica em **Enviar orçamento** (valor, data, horário e local). O contrato sai pronto e já assinado por ele; o cliente revisa, assina (ou recusa e o profissional envia outro) e paga.
+
+**Carteira do trabalhador:** em **Carteira** (menu do trabalhador) aparecem o saldo disponível (valores liberados após a aprovação das entregas, já sem a taxa), o que ainda está em custódia e o histórico. O saque é via Pix (simulado; a chave `falha@goatwork.com` sempre falha, para testar o erro). Valor mínimo: `Plataforma:SaqueMinimo` (padrão R$ 10,00).
+
+**Modo escuro:** botão da lua/sol na barra de navegação, em todas as telas. A escolha fica salva no navegador; sem escolha, segue o tema do sistema.
+
+**Senha:** mínimo de 8 caracteres, com letra maiúscula, letra minúscula, número e caractere especial, sem espaços.
 
 Na primeira execução a API cria as contas de exemplo (senha de todas: `Goat@1234`):
 

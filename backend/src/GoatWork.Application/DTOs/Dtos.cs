@@ -146,7 +146,23 @@ public record ConversaResumoDto(int IdChat, string Titulo, string Subtitulo, Dat
 
 public record MensagemDto(int Id, string Remetente, bool Minha, string Conteudo, bool Bloqueada, DateTime DataHora);
 
-public record AcordoDto(decimal Valor, DateOnly Data, string? Hora);
+/// <summary>Mensagem fixada no topo do chat: o que foi pedido no briefing.</summary>
+public record FixadoChatDto(string Servico, string? Local, DateOnly? PrazoDesejado, decimal? OrcamentoEstimado);
+
+/// <summary>Orçamento enviado pelo trabalhador (contrato já assinado por ele).</summary>
+public record PropostaChatDto(
+    int IdContrato,
+    string Numero,
+    decimal Valor,
+    DateOnly Data,
+    string? Hora,
+    string? Local,
+    string Status,
+    bool AssinadoCliente,
+    bool AssinadoTrabalhador);
+
+/// <summary>Valores para pré-preencher o formulário "Enviar orçamento".</summary>
+public record SugestaoOrcamentoDto(decimal? Valor, DateOnly? Data, string? Hora, string? Local);
 
 public record ChatDto(
     int IdChat,
@@ -155,17 +171,19 @@ public record ChatDto(
     string Titulo,
     string Subtitulo,
     string Status,
+    string MeuPapel,
     List<MensagemDto> Mensagens,
-    AcordoDto? Acordo,
-    int? IdContrato,
-    string? NumeroContrato,
-    string? StatusContrato);
+    FixadoChatDto Fixado,
+    PropostaChatDto? Proposta,
+    SugestaoOrcamentoDto? Sugestao,
+    bool PedidoFechadoComOutro);
 
 // ---------------------------------------------------------------------
 // Fase 4 · Contrato, pagamento e entrega
 // ---------------------------------------------------------------------
 
-public record GerarContratoRequest(int IdChat, decimal Valor, DateOnly Prazo);
+/// <summary>"Enviar orçamento" (trabalhador): gera o contrato já assinado por ele.</summary>
+public record GerarContratoRequest(int IdChat, decimal Valor, DateOnly Prazo, string? Hora, string? Local);
 
 public record ClausulaDto(string Titulo, string Texto);
 
@@ -182,6 +200,8 @@ public record ContratoDto(
     List<ClausulaDto> Clausulas,
     decimal Valor,
     DateOnly Prazo,
+    string? Hora,
+    string? Local,
     decimal TaxaPerc,
     DateTime? AceiteClienteEm,
     DateTime? AceiteTrabalhadorEm,
@@ -284,6 +304,24 @@ public record AvaliacaoContextoDto(
     int? MinhaNota);
 
 public record AvaliarRequest(int Nota, string? Comentario);
+
+// ---------------------------------------------------------------------
+// Carteira do trabalhador (saldo e saques)
+// ---------------------------------------------------------------------
+
+public record MovimentacaoDto(string Tipo, string Descricao, decimal Valor, DateTime Data, string Situacao);
+
+public record CarteiraDto(
+    decimal Disponivel,
+    decimal EmCustodia,
+    decimal TotalRecebido,
+    decimal TotalSacado,
+    decimal SaqueMinimo,
+    string DocumentoTipo,
+    string Documento,
+    List<MovimentacaoDto> Movimentacoes);
+
+public record SacarRequest(decimal Valor, string TipoChave, string Chave);
 
 public record AdminResumoDto(int Abertas, int EmAnalise, int Resolvidas);
 

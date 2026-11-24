@@ -63,7 +63,7 @@ function renderTrabalhador(d) {
     } else {
         let estado;
         if (pendente) estado = `<strong>Entrega ${pendente.numero} enviada</strong>Aguardando a aprovação do cliente. O pagamento continua em custódia.`;
-        else if (d.statusContrato === 'CONCLUIDO') estado = `<strong>Contrato concluído</strong>Pagamento de ${moeda(d.valorLiquido)} liberado para você.<br><a class="btn btn-primary" href="avaliacao.html?contrato=${d.idContrato}">Avaliar o cliente</a>`;
+        else if (d.statusContrato === 'CONCLUIDO') estado = `<strong>Contrato concluído</strong>Pagamento de ${moeda(d.valorLiquido)} liberado na sua carteira.<br><a class="btn btn-primary" href="avaliacao.html?contrato=${d.idContrato}">Avaliar o cliente</a> <a class="btn btn-secondary" href="carteira.html">Ver carteira</a>`;
         else if (d.statusContrato === 'EM_DISPUTA') estado = `<strong>Contrato em disputa</strong>Um administrador está analisando o chat e o contrato.<br><a class="btn btn-secondary" href="disputa.html?contrato=${d.idContrato}">Ver disputa</a>`;
         else if (d.statusContrato === 'CANCELADO') estado = '<strong>Contrato cancelado</strong>O valor foi estornado ao cliente.';
         else estado = '<strong>Aguardando pagamento</strong>Você poderá registrar a entrega quando o pagamento do cliente estiver em custódia.';

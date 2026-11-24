@@ -7,6 +7,9 @@ public interface IPagamentoGateway
     Task<ResultadoCobranca> CobrarAsync(CobrancaGateway cobranca, CancellationToken ct = default);
     Task<bool> LiberarAsync(string idTransacao, decimal valorLiquido, CancellationToken ct = default);
     Task<bool> EstornarAsync(string idTransacao, decimal valor, CancellationToken ct = default);
+
+    /// <summary>Transfere o valor para a chave Pix do trabalhador (saque da carteira).</summary>
+    Task<ResultadoCobranca> TransferirPixAsync(string referencia, decimal valor, string tipoChave, string chave, CancellationToken ct = default);
 }
 
 public record CobrancaGateway(string Referencia, string Metodo, decimal Valor, string? NumeroCartao, string? NomeCartao, string? Validade, string? Cvv);

@@ -36,8 +36,8 @@
 }
 
 .termos-itens li.is-destaque {
-    border-color: #f8cfa6;
-    background: #fdecd9;
+    border-color: var(--gw-destaque-border);
+    background: var(--gw-destaque-bg);
     color: var(--gw-brown);
     font-weight: 700;
 }

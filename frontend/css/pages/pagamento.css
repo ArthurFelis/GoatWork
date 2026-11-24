@@ -35,10 +35,10 @@
     display: grid;
     place-items: center;
     aspect-ratio: 1;
-    border: 1px solid #ead9c8;
+    border: 1px solid var(--gw-qr-border);
     border-radius: 10px;
-    background: #ffffff;
-    color: #6a564b;
+    background: var(--gw-surface);
+    color: var(--gw-text-soft);
     font-size: 13px;
     font-weight: 700;
     text-align: center;
@@ -130,7 +130,7 @@
 }
 
 .pg-servico p {
-    color: #6a564b;
+    color: var(--gw-text-soft);
     font-size: 13.5px;
 }
 

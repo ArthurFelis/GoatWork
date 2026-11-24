@@ -20,7 +20,7 @@
     padding: 26px 26px 24px;
     border: 1px solid var(--gw-border);
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--gw-surface);
 }
 
 .cv-topo {
@@ -43,7 +43,7 @@
 }
 
 .cv-quem span:not(.avatar) {
-    color: #8b7b70;
+    color: var(--gw-muted-2);
     font-size: 12.5px;
 }
 
@@ -83,7 +83,7 @@
     justify-content: space-between;
     gap: 14px;
     padding: 20px 26px;
-    border: 1px solid #f0dfcf;
+    border: 1px solid var(--gw-border-warm);
     border-radius: 12px;
     background: var(--gw-cream-3);
 }
@@ -95,7 +95,7 @@
 }
 
 .cv-recusado span {
-    color: #8b7b70;
+    color: var(--gw-muted-2);
     font-size: 12.5px;
 }
 

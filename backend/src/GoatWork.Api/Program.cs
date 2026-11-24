@@ -42,6 +42,7 @@ builder.Services.AddScoped<EntregaService>();
 builder.Services.AddScoped<DisputaService>();
 builder.Services.AddScoped<AvaliacaoService>();
 builder.Services.AddScoped<AdminService>();
+builder.Services.AddScoped<CarteiraService>();
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

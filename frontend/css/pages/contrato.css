@@ -29,7 +29,7 @@
 
 .ct-clausula p {
     margin-top: 5px;
-    color: #4f433d;
+    color: var(--gw-text-body);
     font-size: 14px;
 }
 
@@ -47,7 +47,7 @@
     padding: 6px 12px;
     border-radius: 8px;
     background: var(--gw-cream);
-    color: #6a564b;
+    color: var(--gw-text-soft);
     font-size: 14px;
 }
 
@@ -65,7 +65,7 @@
 }
 
 .ct-assinatura .pendente {
-    color: #9b8b80;
+    color: var(--gw-muted-3);
     font-size: 12.5px;
     font-weight: 600;
 }
@@ -89,4 +89,17 @@
 .ct-voltar {
     justify-self: start;
     font-size: 13px;
+}
+
+.ct-recusar {
+    display: block;
+    width: 100%;
+    margin-top: 14px;
+    border: 0;
+    background: none;
+    color: var(--gw-brown);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }

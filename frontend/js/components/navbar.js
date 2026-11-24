@@ -1,5 +1,6 @@
 import { RAIZ, pagina, usuarioAtual, limparSessao } from '../utils/storage.js';
 import { esc } from '../utils/formatadores.js';
+import { botaoTemaHtml, ligarBotaoTema } from './tema.js';
 
 // Menus de cada perfil, exatamente como nas telas do Figma
 const MENUS = {
@@ -17,6 +18,7 @@ const MENUS = {
         ['convites', 'Convites', 'convites.html'],
         ['mensagens', 'Mensagens', 'chat.html'],
         ['contratos', 'Contratos', 'contratos.html'],
+        ['carteira', 'Carteira', 'carteira.html'],
         ['perfil', 'Meu perfil', 'perfil-trabalhador.html']
     ],
     ADMIN: [
@@ -49,7 +51,7 @@ export function carregarNavbar(ativo = '') {
                <div class="gw-user-menu" hidden>
                    <div class="gw-user-email">${esc(usuario.email)}</div>
                    ${usuario.tipo === 'CLIENTE' ? `<a href="${pagina('novo-pedido.html')}">+ Novo pedido</a>` : ''}
-                   ${usuario.tipo === 'TRABALHADOR' ? `<a href="${pagina('perfil-trabalhador.html')}">Meu perfil</a>` : ''}
+                   ${usuario.tipo === 'TRABALHADOR' ? `<a href="${pagina('carteira.html')}">Minha carteira</a><a href="${pagina('perfil-trabalhador.html')}">Meu perfil</a>` : ''}
                    <a href="${pagina('termos.html')}">Termos de uso</a>
                    <button type="button" data-sair>Sair</button>
                </div>
@@ -63,10 +65,12 @@ export function carregarNavbar(ativo = '') {
                 <span>Goat<em>Work</em></span>
             </a>
             <nav class="gw-nav-links" aria-label="Navegação principal">${links}</nav>
-            <div class="gw-nav-actions">${acoes}</div>
+            <div class="gw-nav-actions">${botaoTemaHtml()}${acoes}</div>
             <button class="gw-menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">☰</button>
         </header>
     `;
+
+    ligarBotaoTema(alvo);
 
     const toggle = alvo.querySelector('.gw-menu-toggle');
     const nav = alvo.querySelector('.gw-nav-links');

@@ -6,6 +6,7 @@
     <meta name="theme-color" content="#0c1e44">
     <title>Criar conta — GoatWork</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c1e44'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-weight='700' font-size='18' fill='%23fe893c'%3EG%3C/text%3E%3C/svg%3E">
+    <script src="../js/utils/tema-inicial.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
@@ -35,7 +36,7 @@
                     <p class="form-error" id="erro" hidden></p>
 
                     <div class="field">
-                        <label class="label" for="nome">Nome completo</label>
+                        <label class="label" for="nome" id="rotulo-nome">Nome completo</label>
                         <input class="input" id="nome" type="text" placeholder="Seu nome" autocomplete="name" required>
                     </div>
 
@@ -46,7 +47,7 @@
 
                     <div class="field field-row">
                         <div>
-                            <label class="label" for="cpf">CPF</label>
+                            <label class="label" for="cpf" id="rotulo-documento">CPF</label>
                             <input class="input" id="cpf" type="text" inputmode="numeric" placeholder="000.000.000-00" required>
                         </div>
                         <div>
@@ -55,8 +56,8 @@
                         </div>
                     </div>
 
-                    <!-- Cliente -->
-                    <div class="field field-row" data-somente="CLIENTE">
+                    <!-- Cliente e trabalhador: pessoa física (CPF) ou jurídica (CNPJ) -->
+                    <div class="field field-row">
                         <div>
                             <span class="label">Tipo de pessoa</span>
                             <div class="segmented" role="group" aria-label="Tipo de pessoa" id="tipo-pessoa">
@@ -64,8 +65,8 @@
                                 <button type="button" data-valor="JURIDICA" aria-pressed="false">Jurídica</button>
                             </div>
                         </div>
-                        <div>
-                            <label class="label" for="nome-exibicao">Nome de exibição <small>(opcional)</small></label>
+                        <div data-somente="CLIENTE">
+                            <label class="label" for="nome-exibicao"><span id="rotulo-exibicao">Nome de exibição</span> <small>(opcional)</small></label>
                             <input class="input" id="nome-exibicao" type="text" placeholder="Como quer aparecer">
                         </div>
                     </div>
@@ -85,13 +86,14 @@
                     <div class="field field-row">
                         <div>
                             <label class="label" for="senha">Senha</label>
-                            <input class="input" id="senha" type="password" placeholder="Mínimo 8 caracteres" autocomplete="new-password" required>
+                            <input class="input" id="senha" type="password" placeholder="Crie uma senha forte" autocomplete="new-password" maxlength="64" aria-describedby="requisitos-senha" required>
                         </div>
                         <div>
                             <label class="label" for="confirmar">Confirmar senha</label>
-                            <input class="input" id="confirmar" type="password" placeholder="Repita a senha" autocomplete="new-password" required>
+                            <input class="input" id="confirmar" type="password" placeholder="Repita a senha" autocomplete="new-password" maxlength="64" required>
                         </div>
                     </div>
+                    <ul class="senha-requisitos" id="requisitos-senha" aria-label="Requisitos da senha"></ul>
 
                     <label class="check auth-check">
                         <input type="checkbox" id="aceite">

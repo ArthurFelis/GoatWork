@@ -14,6 +14,27 @@ export function cpfValido(cpf = '') {
     return digito(9) === Number(d[9]) && digito(10) === Number(d[10]);
 }
 
+export function cnpjValido(cnpj = '') {
+    const d = soDigitos(cnpj);
+    if (d.length !== 14 || /^(\d)\1+$/.test(d)) return false;
+    const digito = (tam) => {
+        const pesos = tam === 12 ? [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2] : [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+        const soma = pesos.reduce((acc, p, i) => acc + Number(d[i]) * p, 0);
+        const resto = soma % 11;
+        return resto < 2 ? 0 : 11 - resto;
+    };
+    return digito(12) === Number(d[12]) && digito(13) === Number(d[13]);
+}
+
+export function mascaraCnpj(v) {
+    const d = soDigitos(v).slice(0, 14);
+    return d
+        .replace(/^(\d{2})(\d)/, '$1.$2')
+        .replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3')
+        .replace(/\.(\d{3})(\d)/, '.$1/$2')
+        .replace(/(\d{4})(\d{1,2})$/, '$1-$2');
+}
+
 export function mascaraCpf(v) {
     const d = soDigitos(v).slice(0, 11);
     return d

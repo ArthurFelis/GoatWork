@@ -43,9 +43,11 @@ public class BriefingService
         var pedido = await CarregarAsync(idPedido) ?? throw new NaoEncontradoException("Pedido não encontrado.");
         if (pedido.MensagensIa.Count > 0) return;
 
-        var agora = DateTime.Now;
-        pedido.MensagensIa.Add(new MensagemIa { Remetente = RemetenteIa.IA, Conteudo = AtendimentoIaRegras.Saudacao, DataHora = agora });
-        pedido.MensagensIa.Add(new MensagemIa { Remetente = RemetenteIa.CLIENTE, Conteudo = pedido.DescricaoInicial, DataHora = agora.AddSeconds(1) });
+        // Cada mensagem é gravada antes da próxima: o id (auto-incremento) define a ordem da conversa
+        pedido.MensagensIa.Add(new MensagemIa { Remetente = RemetenteIa.IA, Conteudo = AtendimentoIaRegras.Saudacao, DataHora = DateTime.Now });
+        await _db.SaveChangesAsync();
+        pedido.MensagensIa.Add(new MensagemIa { Remetente = RemetenteIa.CLIENTE, Conteudo = pedido.DescricaoInicial, DataHora = DateTime.Now });
+        await _db.SaveChangesAsync();
         await ResponderComIaAsync(pedido);
         await _db.SaveChangesAsync();
     }
@@ -69,6 +71,7 @@ public class BriefingService
         Validacao.Exigir(req.Conteudo.Length <= 2000, "Mensagem muito longa.");
 
         pedido.MensagensIa.Add(new MensagemIa { Remetente = RemetenteIa.CLIENTE, Conteudo = req.Conteudo.Trim(), DataHora = DateTime.Now });
+        await _db.SaveChangesAsync();
         await ResponderComIaAsync(pedido);
         await _db.SaveChangesAsync();
         return Conversa(pedido);
@@ -77,14 +80,14 @@ public class BriefingService
     private async Task ResponderComIaAsync(Pedido pedido)
     {
         var historico = pedido.MensagensIa
-            .OrderBy(m => m.DataHora).ThenBy(m => m.IdMsgIa)
+            .OrderBy(m => m.IdMsgIa)
             .Select(m => new MensagemContextoIa(m.Remetente, m.Conteudo))
             .ToList();
         var contexto = new ContextoIa(pedido.Categoria.Nome, pedido.DescricaoInicial, historico, DateOnly.FromDateTime(DateTime.Today));
 
         var resposta = await _ia.ProximaRespostaAsync(contexto);
 
-        pedido.MensagensIa.Add(new MensagemIa { Remetente = RemetenteIa.IA, Conteudo = resposta.Mensagem, DataHora = DateTime.Now.AddMilliseconds(500) });
+        pedido.MensagensIa.Add(new MensagemIa { Remetente = RemetenteIa.IA, Conteudo = resposta.Mensagem, DataHora = DateTime.Now });
 
         if (resposta.Briefing is { } b)
         {
@@ -158,7 +161,7 @@ public class BriefingService
 
     private static ConversaIaDto Conversa(Pedido p) => new(
         PedidoService.ParaDto(p),
-        p.MensagensIa.OrderBy(m => m.DataHora).ThenBy(m => m.IdMsgIa)
+        p.MensagensIa.OrderBy(m => m.IdMsgIa)
             .Select(m => new MensagemIaDto(m.IdMsgIa, m.Remetente.ToString(), m.Conteudo, m.DataHora)).ToList(),
         p.Briefing is null ? null : ParaDto(p));
 

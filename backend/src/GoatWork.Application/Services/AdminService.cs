@@ -43,7 +43,7 @@ public class AdminService
         var c = await _contratos.CarregarAsync(new UsuarioLogado(idAdmin, TipoUsuario.ADMIN), d.IdContrato);
         var idCliente = ContratoService.IdCliente(c);
 
-        var chat = c.Chat.Mensagens.OrderBy(m => m.DataHora).ThenBy(m => m.IdMensagem)
+        var chat = c.Chat.Mensagens.OrderBy(m => m.IdMensagem)
             .Select(m =>
             {
                 var doCliente = m.IdRemetente == idCliente;

@@ -48,6 +48,17 @@ public class PagamentoGatewayClient : IPagamentoGateway
         return Task.FromResult(true);
     }
 
+    public Task<ResultadoCobranca> TransferirPixAsync(string referencia, decimal valor, string tipoChave, string chave, CancellationToken ct = default)
+    {
+        // Simulação: a chave de teste "falha@goatwork.com" sempre é recusada
+        if (string.Equals(chave, "falha@goatwork.com", StringComparison.OrdinalIgnoreCase))
+            return Task.FromResult(new ResultadoCobranca(false, null, "A instituição do recebedor recusou a transferência. Confira a chave Pix."));
+
+        var id = $"sim_saque_{Guid.NewGuid():N}"[..32];
+        _logger.LogInformation("Gateway simulado: saque Pix de {Valor} ({Tipo}) {Ref} -> {Id}", valor, tipoChave, referencia, id);
+        return Task.FromResult(new ResultadoCobranca(true, id, null));
+    }
+
     public Task<bool> EstornarAsync(string idTransacao, decimal valor, CancellationToken ct = default)
     {
         _logger.LogInformation("Gateway simulado: estorno de {Valor} da transação {Id}", valor, idTransacao);

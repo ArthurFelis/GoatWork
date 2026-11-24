@@ -29,14 +29,14 @@
 }
 
 .np-dicas .num-list {
-    color: #5a463b;
+    color: var(--gw-text-strong);
     font-size: 14.5px;
 }
 
 .np-dicas-nota {
     margin-top: 20px;
     padding-top: 18px;
-    border-top: 1px solid #ead2bd;
+    border-top: 1px solid var(--gw-divider-warm);
     color: var(--gw-brown-2);
     font-size: 13px;
 }

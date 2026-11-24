@@ -16,7 +16,7 @@
     padding: 11px 15px;
     border: 1px solid var(--gw-input-border);
     border-radius: var(--gw-radius-sm);
-    background: #ffffff;
+    background: var(--gw-surface);
     color: var(--gw-ink);
     font-size: 15px;
     transition: border-color 0.15s, box-shadow 0.15s;
@@ -24,7 +24,7 @@
 
 .input::placeholder,
 .textarea::placeholder {
-    color: #8a8580;
+    color: var(--gw-placeholder);
 }
 
 .input:focus,
@@ -37,7 +37,7 @@
 
 .input.is-invalid,
 .textarea.is-invalid {
-    border-color: #d64b2a;
+    border-color: var(--gw-red-border);
 }
 
 .textarea {
@@ -65,7 +65,7 @@
     border: 0;
     border-radius: var(--gw-radius-sm);
     background: transparent;
-    color: #5a463b;
+    color: var(--gw-text-strong);
     font-size: 15px;
     font-weight: 700;
 }
@@ -103,14 +103,85 @@
     margin: 0 0 14px;
     padding: 10px 14px;
     border-radius: var(--gw-radius-sm);
-    background: #fdecea;
-    color: #a1300f;
+    background: var(--gw-error-bg);
+    color: var(--gw-red);
     font-size: 14px;
     font-weight: 600;
 }
 
 @media (max-width: 600px) {
     .field-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------- Senha: mostrar/ocultar e requisitos ---------- */
+.senha-campo {
+    position: relative;
+}
+
+.senha-campo .input {
+    padding-right: 46px;
+}
+
+.senha-olho {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 6px;
+    background: none;
+    color: var(--gw-muted-2);
+    transform: translateY(-50%);
+}
+
+.senha-olho:hover,
+.senha-olho[aria-pressed="true"] {
+    color: var(--gw-brown);
+}
+
+.senha-requisitos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 14px;
+    margin: -6px 0 18px;
+    padding: 0;
+    list-style: none;
+    color: var(--gw-muted-2);
+    font-size: 12.5px;
+}
+
+.senha-requisitos li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.senha-requisitos li::before {
+    content: "○";
+    font-size: 11px;
+}
+
+.senha-requisitos li.is-ok {
+    color: var(--gw-green);
+    font-weight: 600;
+}
+
+.senha-requisitos li.is-ok::before {
+    content: "✓";
+    font-weight: 800;
+}
+
+.senha-requisitos.is-destaque li:not(.is-ok) {
+    color: var(--gw-red);
+}
+
+@media (max-width: 600px) {
+    .senha-requisitos {
         grid-template-columns: 1fr;
     }
 }

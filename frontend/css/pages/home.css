@@ -17,7 +17,7 @@
     padding: 6px 14px;
     border-radius: 999px;
     background: var(--gw-peach);
-    color: #6a2c08;
+    color: var(--gw-pill-fg);
     font-size: 12px;
     font-weight: 700;
 }
@@ -96,7 +96,7 @@
 
 .passos li {
     padding: 22px 22px 26px;
-    border: 1px solid #f0dfcf;
+    border: 1px solid var(--gw-border-warm);
     border-radius: 10px;
     background: var(--gw-cream);
 }
@@ -120,7 +120,7 @@
 }
 
 .passos p {
-    color: #7d6a5d;
+    color: var(--gw-text-warm);
     font-size: 12.5px;
     line-height: 1.55;
 }
@@ -161,9 +161,9 @@
 .prof-card {
     display: block;
     padding: 20px;
-    border: 1px solid #f0dfcf;
+    border: 1px solid var(--gw-border-warm);
     border-radius: 10px;
-    background: #ffffff;
+    background: var(--gw-surface);
     transition: box-shadow 0.15s, transform 0.15s;
 }
 
@@ -186,7 +186,7 @@
 .prof-card span:not(.avatar) {
     display: block;
     margin-top: 4px;
-    color: #8b7b70;
+    color: var(--gw-muted-2);
     font-size: 12.5px;
 }
 
